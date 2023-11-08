@@ -11,6 +11,7 @@ void Game::initWindow()
 void Game::initObject()
 {
 	this->testObject = new TestObject();
+	this->player = new Player();
 }
 
 Game::Game()
@@ -63,6 +64,7 @@ void Game::Render()
 	this->gameWindow->clear();
 
 	this->testObject->Render(this->gameWindow);
+	this->player->Render(this->gameWindow);
 
 	this->gameWindow->display();
 }

@@ -3,18 +3,18 @@
 
 //Variable functions
 
-void TestObject::initVars() {
+void TestObject::InitVars() {
 	this->SetPos(0.f, 0.f);
 	this->movementSpeed = 1.f;
 }
 
-void TestObject::initTexture(std::string texturePath)
+void TestObject::InitTexture(std::string texturePath)
 {
 	this->texture = new sf::Texture();
 	this->texture->loadFromFile(texturePath);
 }
 
-void TestObject::initSprite()
+void TestObject::InitSprite()
 {
 	this->sprite.setTexture(*this->texture);
 	this->sprite.setPosition(this->objectPos);
@@ -22,9 +22,9 @@ void TestObject::initSprite()
 
 TestObject::TestObject()
 {
-	this->initVars();
-	this->initTexture("Graphics/test-img.jpg");
-	this->initSprite();
+	this->InitVars();
+	this->InitTexture("Graphics/test-img.jpg");
+	this->InitSprite();
 }
 
 TestObject::TestObject(std::string texturePath, float xPos, float yPos)

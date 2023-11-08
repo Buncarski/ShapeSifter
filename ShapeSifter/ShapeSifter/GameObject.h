@@ -9,13 +9,13 @@ protected:
 	sf::Sprite sprite;
 	float movementSpeed;
 
+	//Init functions
+
 public:
 	//Constructor/destructor
 	GameObject() = default;
 	virtual ~GameObject() = default;
 
-	//Init functions
-	
 	//Functions
 
 	//Getters/Setters

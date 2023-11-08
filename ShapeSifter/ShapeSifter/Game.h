@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
 #include "TestObject.h"
+#include "Player.h"
 class Game
 {
 private:
@@ -10,6 +11,7 @@ private:
 	sf::Event ev;
 
 	GameObject* testObject;
+	GameObject* player;
 
 	void initWindow();
 	virtual void initObject();

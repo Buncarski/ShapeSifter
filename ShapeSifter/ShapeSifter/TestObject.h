@@ -4,9 +4,9 @@ class TestObject: public GameObject
 {
 
 	//Init functions
-	void initVars();
-	virtual void initTexture(std::string texturePath);
-	virtual void initSprite();
+	virtual void InitVars();
+	virtual void InitTexture(std::string texturePath);
+	virtual void InitSprite();
 
 public:
 	//Constructor/destructor
