@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "TestObject.h"
 #include "Player.h"
+#include "Common.h"
+#include "bullet.h"
 class Game
 {
 private:
@@ -11,7 +13,8 @@ private:
 	sf::Event ev;
 
 	GameObject* testObject;
-	GameObject* player;
+	Player* player;
+	std::vector<GameObject*> bullets;
 
 	void initWindow();
 	virtual void initObject();
@@ -29,8 +32,9 @@ public:
 	void Run();
 
 	void UpdateEventPolls();
+	void UpdateBullets();
 	void Update();
 	void Render();
-
+	void conjureBullet();
 };
 

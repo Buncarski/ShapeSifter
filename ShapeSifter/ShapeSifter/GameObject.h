@@ -1,5 +1,8 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include "Common.h"
+#include<iostream>
+#include <cmath>
 class GameObject
 {
 protected:

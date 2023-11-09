@@ -1,6 +1,2 @@
-﻿  Game.cpp
-  main.cpp
-  Player.cpp
-  TestObject.cpp
-  Generating Code...
+﻿  Common.cpp
   ShapeSifter.vcxproj -> D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\x64\Debug\ShapeSifter.exe

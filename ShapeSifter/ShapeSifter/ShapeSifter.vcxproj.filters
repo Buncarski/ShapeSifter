@@ -13,19 +13,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki źródłowe\Objects">
+      <UniqueIdentifier>{eb523a87-39b4-41bb-90e3-40767ebc981f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Main">
+      <UniqueIdentifier>{65ebaaa9-a66c-47c7-9363-e9f4edc4a28a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="TestObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Pliki źródłowe\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObject.cpp">
+      <Filter>Pliki źródłowe\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Pliki źródłowe\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Pliki źródłowe\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Pliki źródłowe\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +51,12 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
