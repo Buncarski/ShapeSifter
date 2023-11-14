@@ -30,6 +30,7 @@ public:
 	virtual void SetScale(float sX, float sY) {
 		this->sprite.setScale(sX, sY);
 	};
+
 	virtual sf::Vector2f GetPos() {
 		return this->objectPos;
 	};

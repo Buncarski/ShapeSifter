@@ -19,6 +19,12 @@
     <Filter Include="Pliki źródłowe\Main">
       <UniqueIdentifier>{65ebaaa9-a66c-47c7-9363-e9f4edc4a28a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Objects">
+      <UniqueIdentifier>{e67cc58a-2f13-4362-b4be-3c952eaf20b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Main">
+      <UniqueIdentifier>{8d311771-d01e-442d-bf3f-b273ac78f60f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp">
@@ -39,25 +45,31 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe\Main</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Pliki źródłowe\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="TestObject.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="GameObject.h">
+      <Filter>Pliki nagłówkowe\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Pliki nagłówkowe\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Pliki nagłówkowe\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Pliki nagłówkowe\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
