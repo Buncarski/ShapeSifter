@@ -25,6 +25,9 @@
     <Filter Include="Pliki nagłówkowe\Main">
       <UniqueIdentifier>{8d311771-d01e-442d-bf3f-b273ac78f60f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Objects\Enemies">
+      <UniqueIdentifier>{4b4d991a-c12a-4ecc-a55f-562512f08977}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp">

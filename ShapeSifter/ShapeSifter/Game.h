@@ -5,6 +5,9 @@
 #include "Player.h"
 #include "Common.h"
 #include "bullet.h"
+#include "Enemy.h"
+
+#include<cstdlib>
 class Game
 {
 private:
@@ -15,6 +18,9 @@ private:
 	GameObject* testObject;
 	Player* player;
 	std::vector<GameObject*> bullets;
+	std::vector<Enemy*> enemies;
+	char directions[4] = {'N','S','W','E'};
+
 
 	void initWindow();
 	virtual void initObject();
@@ -33,8 +39,10 @@ public:
 
 	void UpdateEventPolls();
 	void UpdateBullets();
+	void UpdateEnemies();
 	void Update();
 	void Render();
 	void conjureBullet();
+	void spawnEnemy();
 };
 

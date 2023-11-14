@@ -12,6 +12,7 @@ void Game::initObject()
 {
 	this->testObject = new TestObject();
 	this->player = new Player();
+	this->spawnEnemy();
 }
 
 Game::Game()
@@ -70,6 +71,13 @@ void Game::UpdateBullets() {
 	}
 }
 
+void Game::UpdateEnemies()
+{
+	for (Enemy* e : enemies) {
+		e->Update();
+	}
+}
+
 //Functions
 void Game::Update()
 {
@@ -77,13 +85,19 @@ void Game::Update()
 	this->UpdateEventPolls();
 
 	this->testObject->Update();
+
+	//Player related
 	if (this->player->GetBulletCall()) {
 		this->conjureBullet();
 	}
 	this->player->Update();
+
 	if (bullets.size() > 0) {
 		this->UpdateBullets();
 	}
+
+	//NPC related
+	this->UpdateEnemies();
 }
 
 void Game::Render()
@@ -99,10 +113,24 @@ void Game::Render()
 	}
 	this->player->Render(this->gameWindow);
 
+	for (Enemy* e : enemies) {
+		e->Render(this->gameWindow);
+	}
+
 	this->gameWindow->display();
 }
 
 void Game::conjureBullet()
 {
 	bullets.push_back(new Bullet(sf::Mouse::getPosition(*this->gameWindow)));
+}
+
+void Game::spawnEnemy()
+{
+	//Random Spawn selection
+	srand((unsigned) time(NULL));
+
+	int random = rand() % 4;
+
+	enemies.push_back(new Enemy(this->player, this->directions[random]));
 }
