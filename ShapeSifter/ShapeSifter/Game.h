@@ -40,6 +40,7 @@ public:
 	void UpdateEventPolls();
 	void UpdateBullets();
 	void UpdateEnemies();
+	void UpdateCollisions();
 	void Update();
 	void Render();
 	void conjureBullet();

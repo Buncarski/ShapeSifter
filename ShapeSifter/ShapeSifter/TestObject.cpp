@@ -23,7 +23,7 @@ void TestObject::InitSprite()
 TestObject::TestObject()
 {
 	this->InitVars();
-	this->InitTexture("Graphics/test-img.jpg");
+	this->InitTexture("Graphics/background.png");
 	this->InitSprite();
 }
 

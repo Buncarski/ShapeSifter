@@ -8,7 +8,7 @@ void Bullet::InitVars()
 	this->mouseY -= center_y;
 
 	float vecLength = sqrt((mouseX * mouseX) + (mouseY * mouseY));
-	this->movementSpeed = 4.0f;
+	this->movementSpeed = 6.0f;
 	this->SetPos(window_x / 2 - 8, window_y / 2 - 8);
 	
 	this->movementVector.x = (mouseX / vecLength) * this->movementSpeed;

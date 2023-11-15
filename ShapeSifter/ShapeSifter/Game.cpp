@@ -73,8 +73,29 @@ void Game::UpdateBullets() {
 
 void Game::UpdateEnemies()
 {
+	//Update
 	for (Enemy* e : enemies) {
 		e->Update();
+	}
+}
+
+void Game::UpdateCollisions()
+{
+	int iter_bullet = 0;
+
+	for (GameObject* b : bullets) {
+		int iter_enemy = 0;
+		for (Enemy* e : enemies) {
+			if (b->GetHitbox().getGlobalBounds().intersects(e->GetHitbox().getGlobalBounds())) {
+				enemies.erase(enemies.begin() + iter_enemy);
+				delete e;
+				bullets.erase(bullets.begin() + iter_bullet);
+				delete b;
+				
+			}
+			iter_enemy++;
+		}
+		iter_bullet++;
 	}
 }
 
@@ -98,6 +119,9 @@ void Game::Update()
 
 	//NPC related
 	this->UpdateEnemies();
+
+	//Collisions
+	this->UpdateCollisions();
 }
 
 void Game::Render()

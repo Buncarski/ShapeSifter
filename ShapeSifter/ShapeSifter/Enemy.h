@@ -5,9 +5,10 @@ class Enemy: public GameObject
 {
 protected:
 	sf::Vector2f movementVector;
+	sf::RectangleShape hitbox;
 	GameObject* target;
 	//Init functions
-	virtual void InitVars(GameObject* target, char direction);
+	virtual void InitVars(GameObject& target, char direction);
 	virtual void InitTexture(std::string texturePath);
 	virtual void InitSprite();
 

@@ -1,8 +1,2 @@
-﻿  Enemy.cpp
-D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(7,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(10,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(10,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(13,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(16,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(16,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  TestObject.cpp
   ShapeSifter.vcxproj -> D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\x64\Debug\ShapeSifter.exe
