@@ -17,7 +17,7 @@ private:
 
 	GameObject* testObject;
 	Player* player;
-	std::vector<GameObject*> bullets;
+	std::vector<Bullet*> bullets;
 	std::vector<Enemy*> enemies;
 	char directions[4] = {'N','S','W','E'};
 

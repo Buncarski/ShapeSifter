@@ -35,8 +35,8 @@ public:
 		return this->objectPos;
 	};
 
-	virtual sf::Sprite GetHitbox() {
-		return this->sprite;
+	virtual sf::FloatRect GetHitbox() {
+		return this->sprite.getGlobalBounds();
 	}
 
 	virtual void Move() = 0;

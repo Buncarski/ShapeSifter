@@ -73,9 +73,20 @@ void Game::UpdateBullets() {
 
 void Game::UpdateEnemies()
 {
+	int iter_enemy = 0;
 	//Update
 	for (Enemy* e : enemies) {
 		e->Update();
+
+	}
+
+	//Remove
+	for (Enemy* e : enemies) {
+		if (e->GetHp() <= 0) {
+			enemies.erase(enemies.begin() + iter_enemy);
+			delete e;
+		}
+		iter_enemy++;
 	}
 }
 
@@ -83,17 +94,15 @@ void Game::UpdateCollisions()
 {
 	int iter_bullet = 0;
 
-	for (GameObject* b : bullets) {
-		int iter_enemy = 0;
+	for (Bullet* b : bullets) {
+		
 		for (Enemy* e : enemies) {
-			if (b->GetHitbox().getGlobalBounds().intersects(e->GetHitbox().getGlobalBounds())) {
-				enemies.erase(enemies.begin() + iter_enemy);
-				delete e;
+			if (b->GetHitbox().intersects(e->GetHitbox())) {
+				e->dealDamage(b->GetDamage());
 				bullets.erase(bullets.begin() + iter_bullet);
 				delete b;
 				
 			}
-			iter_enemy++;
 		}
 		iter_bullet++;
 	}

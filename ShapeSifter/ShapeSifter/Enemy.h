@@ -4,7 +4,11 @@
 class Enemy: public GameObject
 {
 protected:
+	int hp;
+	float flinchResistance;
+
 	sf::Vector2f movementVector;
+	sf::Vector2f movementModVector; //Vector for any additional modifications to the movement vector (for e.g. knockback)
 	sf::RectangleShape hitbox;
 	GameObject* target;
 	//Init functions
@@ -19,7 +23,11 @@ public:
 	virtual ~Enemy();
 
 	//Functions
+	virtual int GetHp();
 	virtual void setMovementDirection();
+	virtual sf::FloatRect GetHitbox() override;
+
+	virtual void dealDamage(int damage);
 
 	virtual void Move();
 	virtual void Update();

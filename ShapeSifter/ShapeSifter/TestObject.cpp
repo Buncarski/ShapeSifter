@@ -38,21 +38,10 @@ TestObject::~TestObject()
 
 void TestObject::Move()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		this->objectPos.x += movementSpeed * -1.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		this->objectPos.y += movementSpeed * -1.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		this->objectPos.y += movementSpeed * 1.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		this->objectPos.x += movementSpeed * 1.f;
-
-	this->sprite.setPosition(this->objectPos);
 }
 
 void TestObject::Update()
 {
-	this->Move();
 }
 
 void TestObject::Render(sf::RenderTarget* target)
