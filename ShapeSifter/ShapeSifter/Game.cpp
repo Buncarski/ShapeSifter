@@ -15,10 +15,32 @@ void Game::initObject()
 	this->spawnEnemy();
 }
 
+void Game::initMisc()
+{
+	srand((unsigned)time(NULL));
+
+	int random = rand() % 3;
+	if (!music.openFromFile(songList[random])) {
+		std::cout << "Song not found\n";
+	}
+	music.setVolume(20.f);
+
+	if (!destroyBuffer.loadFromFile("Sfx/shoot.wav")) {
+		std::cout << "Failed to load shoot.wav\n";
+	}
+
+	destroySound.setBuffer(destroyBuffer);
+	destroySound.setPitch(0.5f);
+	destroySound.setVolume(20.f);
+}
+
 Game::Game()
 {
 	this->initWindow();
 	this->initObject();
+	this->initMisc();
+	
+	music.play();
 }
 
 Game::~Game()
@@ -83,6 +105,7 @@ void Game::UpdateEnemies()
 	//Remove
 	for (Enemy* e : enemies) {
 		if (e->GetHp() <= 0) {
+			destroySound.play();
 			enemies.erase(enemies.begin() + iter_enemy);
 			delete e;
 		}

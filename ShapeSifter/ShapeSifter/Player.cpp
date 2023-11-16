@@ -5,6 +5,13 @@ void Player::InitVars()
 	this->bulletReshootTime = .0f;
 	this->SetPos(window_x/2 - 32, window_y/2 - 32);
 	this->BulletShot = false;
+
+	if (!buffer.loadFromFile("Sfx/shoot.wav")) {
+		std::cout << "Failed to load shoot.wav\n";
+	}
+
+	sound.setBuffer(buffer);
+	sound.setVolume(20.f);
 }
 
 void Player::InitTexture(std::string texturePath)
@@ -46,7 +53,7 @@ void Player::Move()
 	
 	if (this->bulletReshootTime <= .0f) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			
+			sound.play();
 			this->BulletShot = true;
 			this->bulletReshootTime = 0.2f;
 		}

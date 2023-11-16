@@ -1,9 +1,15 @@
 #pragma once
 #include "GameObject.h"
+#include <SFML/Audio.hpp>
 class Player: public GameObject
 {
 	float bulletReshootTime;
 	bool BulletShot;
+
+	//Sounds
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
+
 	//Init functions
 	virtual void InitVars();
 	virtual void InitTexture(std::string texturePath);

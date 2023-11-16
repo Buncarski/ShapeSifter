@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
 #include "GameObject.h"
 #include "TestObject.h"
 #include "Player.h"
@@ -20,10 +22,17 @@ private:
 	std::vector<Bullet*> bullets;
 	std::vector<Enemy*> enemies;
 	char directions[4] = {'N','S','W','E'};
+	std::string songList[3] = {"Sfx/Music/song_0.ogg", "Sfx/Music/song_1.ogg", "Sfx/Music/song_2.ogg"};
+	sf::Music music;
+
+	//Destroy sound
+	sf::SoundBuffer destroyBuffer;
+	sf::Sound destroySound;
 
 
 	void initWindow();
 	virtual void initObject();
+	void initMisc();
 
 public:
 	//Constructor and destructor

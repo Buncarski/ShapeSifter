@@ -1,9 +1,11 @@
 #pragma once
 #include "GameObject.h"
 #include "Common.h"
+#include <SFML/Audio.hpp>
 class Enemy: public GameObject
 {
 protected:
+	int maxHp;
 	int hp;
 	float flinchResistance;
 
@@ -11,6 +13,15 @@ protected:
 	sf::Vector2f movementModVector; //Vector for any additional modifications to the movement vector (for e.g. knockback)
 	sf::RectangleShape hitbox;
 	GameObject* target;
+
+	//Sounds
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
+
+	//Additional sprites
+	sf::Texture* damagedTex;
+	sf::Sprite damagedSprite;
+
 	//Init functions
 	virtual void InitVars(GameObject& target, char direction);
 	virtual void InitTexture(std::string texturePath);
