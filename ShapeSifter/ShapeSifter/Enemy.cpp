@@ -136,7 +136,6 @@ void Enemy::Move()
 void Enemy::Update()
 {
 	this->Move();
-	std::cout << this->movementModVector.x << " | " << movementModVector.y << "\n";
 }
 
 void Enemy::Render(sf::RenderTarget* target)

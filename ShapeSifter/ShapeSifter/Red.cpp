@@ -101,7 +101,6 @@ void Red::Move()
 void Red::Update()
 {
 	this->Move();
-	std::cout << this->movementModVector.x << " | " << movementModVector.y << "\n";
 }
 
 void Red::Render(sf::RenderTarget* target)

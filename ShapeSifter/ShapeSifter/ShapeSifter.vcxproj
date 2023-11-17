@@ -142,6 +142,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Red.cpp" />
     <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="WaveManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blue.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Red.h" />
     <ClInclude Include="TestObject.h" />
+    <ClInclude Include="WaveManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

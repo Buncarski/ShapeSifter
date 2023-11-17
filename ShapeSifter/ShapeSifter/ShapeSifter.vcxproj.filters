@@ -28,6 +28,9 @@
     <Filter Include="Pliki nagłówkowe\Objects\Enemies">
       <UniqueIdentifier>{4b4d991a-c12a-4ecc-a55f-562512f08977}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\Objects\Enemies">
+      <UniqueIdentifier>{9979f9b0-fa06-45d6-96c1-61d4e0cccce3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp">
@@ -51,11 +54,14 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Pliki źródłowe\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Red.cpp">
-      <Filter>Pliki źródłowe\Objects</Filter>
+    <ClCompile Include="WaveManager.cpp">
+      <Filter>Pliki źródłowe\Main</Filter>
     </ClCompile>
     <ClCompile Include="Blue.cpp">
-      <Filter>Pliki źródłowe\Objects</Filter>
+      <Filter>Pliki źródłowe\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Red.cpp">
+      <Filter>Pliki źródłowe\Objects\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +89,11 @@
     <ClInclude Include="Red.h">
       <Filter>Pliki nagłówkowe\Objects\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="WaveManager.h">
+      <Filter>Pliki nagłówkowe\Main</Filter>
+    </ClInclude>
     <ClInclude Include="Blue.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Objects\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

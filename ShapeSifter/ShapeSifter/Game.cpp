@@ -12,14 +12,14 @@ void Game::initObject()
 {
 	this->testObject = new TestObject();
 	this->player = new Player();
-	this->spawnEnemy('R');
-	this->spawnEnemy('B');
-	this->spawnEnemy('R');
 }
 
 void Game::initMisc()
 {
+	//Init WaveManager
+	this->waveManager = new WaveManager();
 
+	//Set BG music
 	int random = rand() % 3;
 	if (!music.openFromFile(songList[random])) {
 		std::cout << "Song not found\n";
@@ -109,6 +109,8 @@ void Game::UpdateEnemies()
 			destroySound.play();
 			enemies.erase(enemies.begin() + iter_enemy);
 			delete e;
+
+			this->waveManager->damageWave(1);
 		}
 		iter_enemy++;
 	}
@@ -135,6 +137,14 @@ void Game::UpdateCollisions()
 //Functions
 void Game::Update()
 {
+	//EnemySpawn
+	if (waveManager->GetWaveHealth() > 0) {
+		int spawnChance = rand() % 100;
+		if (spawnChance == 1) {
+			this->spawnEnemy('R');
+		}
+	}
+	
 
 	this->UpdateEventPolls();
 

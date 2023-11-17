@@ -101,7 +101,6 @@ void Blue::Move()
 void Blue::Update()
 {
 	this->Move();
-	std::cout << this->movementModVector.x << " | " << movementModVector.y << "\n";
 }
 
 void Blue::Render(sf::RenderTarget* target)

@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include "Red.h"
 #include "Blue.h"
+#include "WaveManager.h"
 
 #include<cstdlib>
 class Game
@@ -19,6 +20,7 @@ private:
 	sf::RenderWindow* gameWindow;
 	sf::Event ev;
 
+	WaveManager* waveManager;
 	GameObject* testObject;
 	Player* player;
 	std::vector<Bullet*> bullets;
