@@ -80,6 +80,7 @@ int Enemy::GetHp()
 
 void Enemy::setMovementDirection()
 {
+
 	float current_x = this->GetPos().x;
 	float current_y = this->GetPos().y;
 

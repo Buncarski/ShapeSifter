@@ -8,6 +8,8 @@
 #include "Common.h"
 #include "bullet.h"
 #include "Enemy.h"
+#include "Red.h"
+#include "Blue.h"
 
 #include<cstdlib>
 class Game
@@ -22,6 +24,7 @@ private:
 	std::vector<Bullet*> bullets;
 	std::vector<Enemy*> enemies;
 	char directions[4] = {'N','S','W','E'};
+	char enemyType[3] = {'R','B','Y'};
 	std::string songList[3] = {"Sfx/Music/song_0.ogg", "Sfx/Music/song_1.ogg", "Sfx/Music/song_2.ogg"};
 	sf::Music music;
 
@@ -53,6 +56,6 @@ public:
 	void Update();
 	void Render();
 	void conjureBullet();
-	void spawnEnemy();
+	void spawnEnemy(char enemySpawnType);
 };
 

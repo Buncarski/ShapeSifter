@@ -2,6 +2,7 @@
 #include "Game.h"
 int main()
 {
+    srand((unsigned)time(NULL));
     //Branch test comment
     Game game;
 

@@ -12,12 +12,13 @@ void Game::initObject()
 {
 	this->testObject = new TestObject();
 	this->player = new Player();
-	this->spawnEnemy();
+	this->spawnEnemy('R');
+	this->spawnEnemy('B');
+	this->spawnEnemy('R');
 }
 
 void Game::initMisc()
 {
-	srand((unsigned)time(NULL));
 
 	int random = rand() % 3;
 	if (!music.openFromFile(songList[random])) {
@@ -118,13 +119,13 @@ void Game::UpdateCollisions()
 	int iter_bullet = 0;
 
 	for (Bullet* b : bullets) {
-		
+		//Game checks if bullet hits enemy when bullet no longer exists
 		for (Enemy* e : enemies) {
 			if (b->GetHitbox().intersects(e->GetHitbox())) {
 				e->dealDamage(b->GetDamage());
 				bullets.erase(bullets.begin() + iter_bullet);
 				delete b;
-				
+				break;
 			}
 		}
 		iter_bullet++;
@@ -181,12 +182,24 @@ void Game::conjureBullet()
 	bullets.push_back(new Bullet(sf::Mouse::getPosition(*this->gameWindow)));
 }
 
-void Game::spawnEnemy()
+void Game::spawnEnemy(char enemySpawnType)
 {
 	//Random Spawn selection
-	srand((unsigned) time(NULL));
-
 	int random = rand() % 4;
+	switch (enemySpawnType) {
+	case 'R': 
+		enemies.push_back(new Red(this->player, this->directions[random]));
+		break;
 
-	enemies.push_back(new Enemy(this->player, this->directions[random]));
+	case 'B':
+		enemies.push_back(new Blue(this->player, this->directions[random]));
+		break;
+
+	case 'Y':
+		enemies.push_back(new Blue(this->player, this->directions[random]));
+		break;
+
+	default:
+		std::cout << "Unknown Enemy Spawn Call\n";
+	}
 }
