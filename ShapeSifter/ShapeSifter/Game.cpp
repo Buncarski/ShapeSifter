@@ -33,6 +33,22 @@ void Game::initMisc()
 	destroySound.setBuffer(destroyBuffer);
 	destroySound.setPitch(0.5f);
 	destroySound.setVolume(20.f);
+
+	this->isPaused = false;
+	this->playerDefeated = false;
+
+	if (!font.loadFromFile("Misc/pixpopenei.ttf"))
+	{
+		std::cout << "FAILED TO LOAD FONT\n";
+	}
+
+	defeatText.setFont(font);
+	defeatText.setString("YOU LOSE");
+	defeatText.setCharacterSize(48);
+	defeatText.setFillColor(sf::Color::White);
+	defeatText.setOutlineColor(sf::Color::Black);
+	defeatText.setOutlineThickness(4.f);
+	defeatText.setPosition(window_x/2 - defeatText.getGlobalBounds().width/2, window_y / 2 - defeatText.getGlobalBounds().height / 2);
 }
 
 Game::Game()
@@ -62,6 +78,16 @@ void Game::Run()
 		this->Update();
 
 		this->Render();
+	}
+}
+
+void Game::PauseGame()
+{
+	if (this->isPaused = false) {
+		this->isPaused = true;
+	}
+	else {
+		this->isPaused = false;
 	}
 }
 
@@ -105,7 +131,11 @@ void Game::UpdateEnemies()
 
 	//Remove
 	for (Enemy* e : enemies) {
-		if (e->GetHp() <= 0) {
+		if (e->GetHitbox().intersects(player->GetHitbox())) {
+			player->TakeDamage(1);
+			enemies.erase(enemies.begin() + iter_enemy);
+			delete e;
+		} else if (e->GetHp() <= 0) {
 			destroySound.play();
 			enemies.erase(enemies.begin() + iter_enemy);
 			delete e;
@@ -137,34 +167,47 @@ void Game::UpdateCollisions()
 //Functions
 void Game::Update()
 {
-	//EnemySpawn
-	if (waveManager->GetWaveHealth() > 0) {
-		int spawnChance = rand() % 100;
-		if (spawnChance == 1) {
-			this->spawnEnemy('R');
-		}
-	}
 	
-
-	this->UpdateEventPolls();
-
-	this->testObject->Update();
-
-	//Player related
-	if (this->player->GetBulletCall()) {
-		this->conjureBullet();
-	}
-	this->player->Update();
-
-	if (bullets.size() > 0) {
-		this->UpdateBullets();
+	//Check for pause
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		PauseGame();
+		std::cout << "pausing";
 	}
 
-	//NPC related
-	this->UpdateEnemies();
+	if (this->isPaused) {
+		std::cout << this->isPaused << "\n";
+	}
 
-	//Collisions
-	this->UpdateCollisions();
+	if (player->GetHp() > 0) {
+		//EnemySpawn
+		if (waveManager->GetWaveHealth() > 0) {
+			int spawnChance = rand() % 100;
+			if (spawnChance == 1) {
+				this->spawnEnemy('R');
+			}
+		}
+
+
+		this->UpdateEventPolls();
+
+		this->testObject->Update();
+
+		//Player related
+		if (this->player->GetBulletCall()) {
+			this->conjureBullet();
+		}
+		this->player->Update();
+
+		if (bullets.size() > 0) {
+			this->UpdateBullets();
+		}
+
+		//NPC related
+		this->UpdateEnemies();
+
+		//Collisions
+		this->UpdateCollisions();
+	}
 }
 
 void Game::Render()
@@ -182,6 +225,10 @@ void Game::Render()
 
 	for (Enemy* e : enemies) {
 		e->Render(this->gameWindow);
+	}
+
+	if (player->GetHp() <= 0) {
+		this->gameWindow->draw(defeatText);
 	}
 
 	this->gameWindow->display();

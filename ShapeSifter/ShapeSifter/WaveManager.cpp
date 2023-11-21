@@ -4,7 +4,7 @@
 void WaveManager::InitWave()
 {
 	this->currentWave = 1;
-	this->waveHealth = 10 * currentWave;
+	this->waveHealth = 100 * currentWave;
 }
 
 WaveManager::WaveManager()

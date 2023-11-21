@@ -34,6 +34,14 @@ private:
 	sf::SoundBuffer destroyBuffer;
 	sf::Sound destroySound;
 
+	//Game States
+	bool isPaused;
+	float rePauseTime;
+	bool playerDefeated;
+
+	//Text
+	sf::Font font;
+	sf::Text defeatText;
 
 	void initWindow();
 	virtual void initObject();
@@ -50,6 +58,7 @@ public:
 
 	//Functions
 	void Run();
+	void PauseGame();
 
 	void UpdateEventPolls();
 	void UpdateBullets();

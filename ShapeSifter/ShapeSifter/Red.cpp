@@ -17,8 +17,8 @@ void Red::InitVars(GameObject& target, char direction)
 		break;
 	}
 	this->target = &target;
-	this->movementSpeed = 1.f;
-	this->maxHp = 5;
+	this->movementSpeed = 3.f;
+	this->maxHp = 3;
 	this->hp = this->maxHp;
 	this->flinchResistance = 2.f;
 
