@@ -5,6 +5,8 @@ private:
 	int currentWave;
 	int waveHealth;
 
+
+
 	void InitWave();
 public:
 	WaveManager();
@@ -15,6 +17,7 @@ public:
 	int GetWaveHealth();
 	void SetWaveHealth();
 
+	void NextWave();
 	void damageWave(int damage);
 	void ResetWave();
 	

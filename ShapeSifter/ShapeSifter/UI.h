@@ -19,9 +19,16 @@ private:
 	sf::Text defeatText;
 	sf::Text waveText;
 	sf::Text healthText;
+
+	//Graphics
+	sf::Texture* hp_tex;
+	std::vector<sf::Sprite*> hp_sprites;
+
 	void initVars(WaveManager& wm, Player& player);
 	void initFont();
 	void initText();
+	void initTex();
+	void initSprites();
 	
 public:
 	//Constructors/Destructors

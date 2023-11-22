@@ -1,3 +1,50 @@
-﻿  UI.cpp
+﻿  Blue.cpp
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Blue.cpp(7,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Blue.cpp(10,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Blue.cpp(10,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Blue.cpp(13,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Blue.cpp(16,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Blue.cpp(16,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Bullet.cpp
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Bullet.cpp(4,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Bullet.cpp(5,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Bullet.cpp(12,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Bullet.cpp(12,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Bullet.cpp(41,19): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Bullet.cpp(42,19): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+  Common.cpp
+  Enemy.cpp
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(8,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(11,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(11,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(14,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(17,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Enemy.cpp(17,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
+  main.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
+  Player.cpp
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Player.cpp(8,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Player.cpp(8,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Red.cpp
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Red.cpp(7,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Red.cpp(10,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Red.cpp(10,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Red.cpp(13,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Red.cpp(16,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Red.cpp(16,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  TestObject.cpp
+  UI.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
+  WaveManager.cpp
+  Generating Code...
   ShapeSifter.vcxproj -> D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\x64\Debug\ShapeSifter.exe

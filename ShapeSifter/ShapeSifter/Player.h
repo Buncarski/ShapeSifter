@@ -5,6 +5,7 @@ class Player: public GameObject
 {
 	float bulletReshootTime;
 	bool BulletShot;
+	int maxHp;
 	int playerHp;
 
 	//Sounds
@@ -26,6 +27,7 @@ public:
 	virtual ~Player();
 
 	//Functions
+	virtual int GetMaxHp();
 	virtual int GetHp();
 	virtual bool GetBulletCall();
 	virtual float GetBulletReshootTime();

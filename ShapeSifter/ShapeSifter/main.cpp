@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+
 int main()
 {
     srand((unsigned)time(NULL));

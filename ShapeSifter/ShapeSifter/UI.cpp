@@ -45,6 +45,23 @@ void UI::initText()
 
 }
 
+void UI::initTex()
+{
+	this->hp_tex = new sf::Texture();
+	this->hp_tex->loadFromFile("Graphics/Health.png");
+}
+
+void UI::initSprites()
+{
+	for (int i = 0; i < this->player_ref->GetMaxHp(); i++) {
+		this->hp_sprites.push_back(new sf::Sprite());
+		this->hp_sprites[i]->setTexture(*this->hp_tex);
+		this->hp_sprites[i]->setScale(2.5f, 2.5f);
+		this->hp_sprites[i]->setPosition(healthText.getGlobalBounds().getPosition().x + 128.f + 32.f * i,
+			healthText.getGlobalBounds().top);
+	}
+}
+
 UI::UI()
 {
 	
@@ -55,25 +72,30 @@ UI::UI(WaveManager* wm, Player* player)
 	this->initVars(*wm, *player);
 	this->initFont();
 	this->initText();
+	this->initTex();
+	this->initSprites();
 }
 
 UI::~UI()
 {
-	delete this->player_ref;
-	delete this->waveManager_ref;
+	for (sf::Sprite* s : hp_sprites) delete s;
+	delete hp_tex;
 }
 
 void UI::Update()
 {
 	waveText.setString("Wave: " + std::to_string(waveManager_ref->GetCurrentWave()));
 
-	healthText.setString("Health: " + std::to_string(player_ref->GetHp()));
+	healthText.setString("Health: ");
 }
 
 void UI::Render(sf::RenderTarget* target)
 {
 	target->draw(waveText);
 	target->draw(healthText);
+	for (int i = 0; i < player_ref->GetHp(); i++) {
+		target->draw(*hp_sprites[i]);
+	}
 
 	if (player_ref->GetHp() <= 0) {
 		target->draw(defeatText);

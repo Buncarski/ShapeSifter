@@ -54,6 +54,12 @@ Game::Game()
 Game::~Game()
 {
 	delete this->gameWindow;
+	delete this->ui;
+	for (Bullet* b : bullets) delete b;
+	for (Enemy* e : enemies) delete e;
+	delete this->player;
+	delete this->testObject;
+	delete this->waveManager;
 }
 
 const bool Game::windowOpened() const
@@ -168,18 +174,20 @@ void Game::Update()
 	if (this->isPaused) {
 		std::cout << this->isPaused << "\n";
 	}
+	this->UpdateEventPolls();
 
 	if (player->GetHp() > 0) {
+		this->waveManager->Update();
+
 		//EnemySpawn
 		if (waveManager->GetWaveHealth() > 0) {
 			int spawnChance = rand() % 100;
 			if (spawnChance == 1) {
-				this->spawnEnemy('R');
+				if(this->waveManager->GetCurrentWave() == 1)
+					this->spawnEnemy('R');
+				else this->spawnEnemy('B');
 			}
 		}
-
-
-		this->UpdateEventPolls();
 
 		this->testObject->Update();
 
