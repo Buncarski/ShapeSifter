@@ -63,6 +63,9 @@
     <ClCompile Include="Red.cpp">
       <Filter>Pliki źródłowe\Objects\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Pliki źródłowe\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestObject.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="Blue.h">
       <Filter>Pliki nagłówkowe\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Pliki nagłówkowe\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

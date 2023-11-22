@@ -19,6 +19,9 @@ void Game::initMisc()
 	//Init WaveManager
 	this->waveManager = new WaveManager();
 
+	//Init UI
+	this->ui = new UI(this->waveManager, this->player);
+
 	//Set BG music
 	int random = rand() % 3;
 	if (!music.openFromFile(songList[random])) {
@@ -37,18 +40,6 @@ void Game::initMisc()
 	this->isPaused = false;
 	this->playerDefeated = false;
 
-	if (!font.loadFromFile("Misc/pixpopenei.ttf"))
-	{
-		std::cout << "FAILED TO LOAD FONT\n";
-	}
-
-	defeatText.setFont(font);
-	defeatText.setString("YOU LOSE");
-	defeatText.setCharacterSize(48);
-	defeatText.setFillColor(sf::Color::White);
-	defeatText.setOutlineColor(sf::Color::Black);
-	defeatText.setOutlineThickness(4.f);
-	defeatText.setPosition(window_x/2 - defeatText.getGlobalBounds().width/2, window_y / 2 - defeatText.getGlobalBounds().height / 2);
 }
 
 Game::Game()
@@ -207,6 +198,8 @@ void Game::Update()
 
 		//Collisions
 		this->UpdateCollisions();
+
+		this->ui->Update();
 	}
 }
 
@@ -227,9 +220,7 @@ void Game::Render()
 		e->Render(this->gameWindow);
 	}
 
-	if (player->GetHp() <= 0) {
-		this->gameWindow->draw(defeatText);
-	}
+	this->ui->Render(this->gameWindow);
 
 	this->gameWindow->display();
 }

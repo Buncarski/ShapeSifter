@@ -11,6 +11,7 @@
 #include "Red.h"
 #include "Blue.h"
 #include "WaveManager.h"
+#include "UI.h"
 
 #include<cstdlib>
 class Game
@@ -20,11 +21,14 @@ private:
 	sf::RenderWindow* gameWindow;
 	sf::Event ev;
 
+	//Game Objects
 	WaveManager* waveManager;
 	GameObject* testObject;
 	Player* player;
 	std::vector<Bullet*> bullets;
 	std::vector<Enemy*> enemies;
+	UI* ui;
+
 	char directions[4] = {'N','S','W','E'};
 	char enemyType[3] = {'R','B','Y'};
 	std::string songList[3] = {"Sfx/Music/song_0.ogg", "Sfx/Music/song_1.ogg", "Sfx/Music/song_2.ogg"};
@@ -39,9 +43,6 @@ private:
 	float rePauseTime;
 	bool playerDefeated;
 
-	//Text
-	sf::Font font;
-	sf::Text defeatText;
 
 	void initWindow();
 	virtual void initObject();
