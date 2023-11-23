@@ -13,18 +13,23 @@ private:
 	//Refs
 	Player* player_ref;
 	WaveManager* waveManager_ref;
+	bool* pause_ref;
 
 	//Text
 	sf::Font font;
 	sf::Text defeatText;
 	sf::Text waveText;
 	sf::Text healthText;
+	sf::Text pauseText;
 
 	//Graphics
 	sf::Texture* hp_tex;
 	std::vector<sf::Sprite*> hp_sprites;
 
-	void initVars(WaveManager& wm, Player& player);
+	sf::Texture* pause_tex;
+	sf::Sprite pause_sprite;
+
+	void initVars(WaveManager& wm, Player& player, bool& pause);
 	void initFont();
 	void initText();
 	void initTex();
@@ -33,7 +38,7 @@ private:
 public:
 	//Constructors/Destructors
 	UI();
-	UI(WaveManager* wm, Player* player);
+	UI(WaveManager* wm, Player* player, bool* pause);
 	virtual ~UI();
 
 	//Functions

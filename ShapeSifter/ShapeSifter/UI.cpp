@@ -1,9 +1,10 @@
 #include "UI.h"
 
-void UI::initVars(WaveManager& wm, Player& player)
+void UI::initVars(WaveManager& wm, Player& player, bool& pause)
 {
 	this->player_ref = &player;
 	this->waveManager_ref = &wm;
+	this->pause_ref = &pause;
 }
 
 void UI::initFont()
@@ -43,12 +44,24 @@ void UI::initText()
 	healthText.setOutlineThickness(4.f);
 	healthText.setPosition(220.f, 20.f);
 
+	//Pause
+	pauseText.setFont(font);
+	pauseText.setCharacterSize(60);
+	pauseText.setString("Paused");
+	pauseText.setFillColor(sf::Color::White);
+	pauseText.setOutlineColor(sf::Color::Black);
+	pauseText.setOutlineThickness(4.f);
+	pauseText.setPosition(window_x/2 - pauseText.getGlobalBounds().width / 2, window_y/4);
+
 }
 
 void UI::initTex()
 {
 	this->hp_tex = new sf::Texture();
 	this->hp_tex->loadFromFile("Graphics/Health.png");
+
+	this->pause_tex = new sf::Texture();
+	this->pause_tex->loadFromFile("Graphics/blackscreen.png");
 }
 
 void UI::initSprites()
@@ -60,6 +73,16 @@ void UI::initSprites()
 		this->hp_sprites[i]->setPosition(healthText.getGlobalBounds().getPosition().x + 128.f + 32.f * i,
 			healthText.getGlobalBounds().top);
 	}
+
+	this->pause_sprite.setTexture(*this->pause_tex);
+	this->pause_sprite.setColor(
+		sf::Color(
+			this->pause_sprite.getColor().r,
+			this->pause_sprite.getColor().g,
+			this->pause_sprite.getColor().b,
+			128
+		)
+	);
 }
 
 UI::UI()
@@ -67,9 +90,9 @@ UI::UI()
 	
 }
 
-UI::UI(WaveManager* wm, Player* player)
+UI::UI(WaveManager* wm, Player* player, bool* pause)
 {
-	this->initVars(*wm, *player);
+	this->initVars(*wm, *player, *pause);
 	this->initFont();
 	this->initText();
 	this->initTex();
@@ -99,5 +122,10 @@ void UI::Render(sf::RenderTarget* target)
 
 	if (player_ref->GetHp() <= 0) {
 		target->draw(defeatText);
+	}
+
+	if (*this->pause_ref == true) {
+		target->draw(pause_sprite);
+		target->draw(pauseText);
 	}
 }

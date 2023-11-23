@@ -20,7 +20,7 @@ void Game::initMisc()
 	this->waveManager = new WaveManager();
 
 	//Init UI
-	this->ui = new UI(this->waveManager, this->player);
+	this->ui = new UI(this->waveManager, this->player, &this->isPaused);
 
 	//Set BG music
 	int random = rand() % 3;
@@ -33,9 +33,23 @@ void Game::initMisc()
 		std::cout << "Failed to load shoot.wav\n";
 	}
 
-	destroySound.setBuffer(destroyBuffer);
-	destroySound.setPitch(0.5f);
-	destroySound.setVolume(20.f);
+	if (!pauseBuffer.loadFromFile("Sfx/pause.ogg")) {
+		std::cout << "Failed to load pause.ogg\n";
+	}
+
+	if (!unpauseBuffer.loadFromFile("Sfx/unpause.ogg")) {
+		std::cout << "Failed to load unpause.ogg\n";
+	}
+
+	sfx_destroy.setBuffer(destroyBuffer);
+	sfx_destroy.setPitch(0.5f);
+	sfx_destroy.setVolume(20.f);
+
+	sfx_pause.setBuffer(pauseBuffer);
+	sfx_pause.setVolume(20.f);
+
+	sfx_unpause.setBuffer(unpauseBuffer);
+	sfx_unpause.setVolume(20.f);
 
 	this->isPaused = false;
 	this->playerDefeated = false;
@@ -80,11 +94,30 @@ void Game::Run()
 
 void Game::PauseGame()
 {
-	if (this->isPaused = false) {
-		this->isPaused = true;
+	if (rePauseTime > 0.f) {
+		rePauseTime -= 1.f / static_cast<float>(refreshRate);
 	}
-	else {
-		this->isPaused = false;
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		return;
+	}
+	
+	if (rePauseTime <= 0.f) {
+		
+		if (this->isPaused == false) {
+			this->isPaused = true;
+			sfx_pause.play();
+			music.pause();
+			std::cout << "Works main";
+		}
+		else {
+			this->isPaused = false;
+			sfx_unpause.play();
+			music.play();
+			std::cout << "Works else";
+
+		}
+		rePauseTime += .5f;
 	}
 }
 
@@ -133,7 +166,7 @@ void Game::UpdateEnemies()
 			enemies.erase(enemies.begin() + iter_enemy);
 			delete e;
 		} else if (e->GetHp() <= 0) {
-			destroySound.play();
+			sfx_destroy.play();
 			enemies.erase(enemies.begin() + iter_enemy);
 			delete e;
 
@@ -164,17 +197,13 @@ void Game::UpdateCollisions()
 //Functions
 void Game::Update()
 {
-	
-	//Check for pause
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-		PauseGame();
-		std::cout << "pausing";
-	}
+	//Pausing
+	this->UpdateEventPolls();
+	PauseGame();
 
 	if (this->isPaused) {
-		std::cout << this->isPaused << "\n";
+		return;
 	}
-	this->UpdateEventPolls();
 
 	if (player->GetHp() > 0) {
 		this->waveManager->Update();
@@ -183,8 +212,8 @@ void Game::Update()
 		if (waveManager->GetWaveHealth() > 0) {
 			int spawnChance = rand() % 100;
 			if (spawnChance == 1) {
-				if(this->waveManager->GetCurrentWave() == 1)
-					this->spawnEnemy('R');
+				if (this->waveManager->GetCurrentWave() == 1)
+					this->spawnEnemy('Y');
 				else this->spawnEnemy('B');
 			}
 		}
@@ -252,7 +281,7 @@ void Game::spawnEnemy(char enemySpawnType)
 		break;
 
 	case 'Y':
-		enemies.push_back(new Blue(this->player, this->directions[random]));
+		enemies.push_back(new Yellow(this->player, this->directions[random]));
 		break;
 
 	default:

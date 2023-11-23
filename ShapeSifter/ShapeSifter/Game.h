@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include "Red.h"
 #include "Blue.h"
+#include "Yellow.h"
 #include "WaveManager.h"
 #include "UI.h"
 
@@ -34,9 +35,13 @@ private:
 	std::string songList[3] = {"Sfx/Music/song_0.ogg", "Sfx/Music/song_1.ogg", "Sfx/Music/song_2.ogg"};
 	sf::Music music;
 
-	//Destroy sound
+	//Sounds
 	sf::SoundBuffer destroyBuffer;
-	sf::Sound destroySound;
+	sf::Sound sfx_destroy;
+	sf::SoundBuffer pauseBuffer;
+	sf::Sound sfx_pause;
+	sf::SoundBuffer unpauseBuffer;
+	sf::Sound sfx_unpause;
 
 	//Game States
 	bool isPaused;
