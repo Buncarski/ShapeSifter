@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\External\include\SFML\Graphics\</FILEPATH>
+      <FILENAME>Glyph.hpp</FILENAME>
+      <LINE>49</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'sf::Glyph::lsbDelta' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>sf::Glyph::{ctor}</FUNCTION>
+    <DECORATED>??0Glyph@sf@@QEAA@XZ</DECORATED>
+    <FUNCLINE>49</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>sf::Glyph::lsbDelta</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\</FILEPATH>
+      <FILENAME>GameObject.h</FILENAME>
+      <LINE>19</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'GameObject::texture' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>GameObject::{ctor}</FUNCTION>
+    <DECORATED>??0GameObject@@QEAA@XZ</DECORATED>
+    <FUNCLINE>19</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>GameObject::texture</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\</FILEPATH>
+      <FILENAME>Enemy.cpp</FILENAME>
+      <LINE>59</LINE>
+      <COLUMN>7</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Enemy::flinchResistance' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Enemy::{ctor}</FUNCTION>
+    <DECORATED>??0Enemy@@QEAA@XZ</DECORATED>
+    <FUNCLINE>59</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Enemy::flinchResistance</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\</FILEPATH>
+      <FILENAME>Player.cpp</FILENAME>
+      <LINE>97</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>6282</DEFECTCODE>
+    <DESCRIPTION>Incorrect operator.</DESCRIPTION>
+    <FUNCTION>Player::Move</FUNCTION>
+    <DECORATED>?Move@Player@@UEAAXXZ</DECORATED>
+    <FUNCLINE>86</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\</FILEPATH>
+      <FILENAME>UI.cpp</FILENAME>
+      <LINE>88</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'UI::pause_ref' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>UI::{ctor}</FUNCTION>
+    <DECORATED>??0UI@@QEAA@XZ</DECORATED>
+    <FUNCLINE>88</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>UI::pause_ref</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT></DEFECTS>

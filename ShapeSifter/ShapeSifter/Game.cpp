@@ -17,7 +17,7 @@ void Game::initObject()
 void Game::initMisc()
 {
 	//Init WaveManager
-	this->waveManager = new WaveManager();
+	this->waveManager = new WaveManager(&this->enemies, this->player);
 
 	//Init UI
 	this->ui = new UI(this->waveManager, this->player, &this->isPaused);
@@ -206,17 +206,8 @@ void Game::Update()
 	}
 
 	if (player->GetHp() > 0) {
-		this->waveManager->Update();
 
-		//EnemySpawn
-		if (waveManager->GetWaveHealth() > 0) {
-			int spawnChance = rand() % 100;
-			if (spawnChance == 1) {
-				if (this->waveManager->GetCurrentWave() == 1)
-					this->spawnEnemy('Y');
-				else this->spawnEnemy('B');
-			}
-		}
+		this->waveManager->Update();
 
 		this->testObject->Update();
 
@@ -265,26 +256,4 @@ void Game::Render()
 void Game::conjureBullet()
 {
 	bullets.push_back(new Bullet(sf::Mouse::getPosition(*this->gameWindow)));
-}
-
-void Game::spawnEnemy(char enemySpawnType)
-{
-	//Random Spawn selection
-	int random = rand() % 4;
-	switch (enemySpawnType) {
-	case 'R': 
-		enemies.push_back(new Red(this->player, this->directions[random]));
-		break;
-
-	case 'B':
-		enemies.push_back(new Blue(this->player, this->directions[random]));
-		break;
-
-	case 'Y':
-		enemies.push_back(new Yellow(this->player, this->directions[random]));
-		break;
-
-	default:
-		std::cout << "Unknown Enemy Spawn Call\n";
-	}
 }
