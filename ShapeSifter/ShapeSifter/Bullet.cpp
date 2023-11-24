@@ -8,11 +8,13 @@ void Bullet::InitVars()
 	this->mouseY -= center_y;
 
 	float vecLength = sqrt((mouseX * mouseX) + (mouseY * mouseY));
-	this->movementSpeed = 4.0f;
+	this->movementSpeed = 6.0f;
 	this->SetPos(window_x / 2 - 8, window_y / 2 - 8);
 	
 	this->movementVector.x = (mouseX / vecLength) * this->movementSpeed;
 	this->movementVector.y = (mouseY / vecLength) * this->movementSpeed;
+
+	this->damage = 1;
 }
 
 void Bullet::InitTexture(std::string texturePath)
@@ -46,6 +48,11 @@ Bullet::Bullet(sf::Vector2i mousePos)
 Bullet::~Bullet()
 {
 	delete this->texture;
+}
+
+int Bullet::GetDamage()
+{
+	return this->damage;
 }
 
 void Bullet::Move()

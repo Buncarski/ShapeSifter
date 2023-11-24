@@ -7,6 +7,8 @@ private:
 	float mouseY;
 
 	sf::Vector2f movementVector;
+	int damage;
+
 	//Init functions
 	virtual void InitVars();
 	virtual void InitTexture(std::string texturePath);
@@ -19,6 +21,8 @@ public:
 	virtual ~Bullet();
 
 	//Functions
+	virtual int GetDamage();
+
 	virtual void Move() override;
 	virtual void Update() override;
 	virtual void Render(sf::RenderTarget* target) override;

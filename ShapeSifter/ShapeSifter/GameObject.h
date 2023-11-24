@@ -30,9 +30,14 @@ public:
 	virtual void SetScale(float sX, float sY) {
 		this->sprite.setScale(sX, sY);
 	};
+
 	virtual sf::Vector2f GetPos() {
 		return this->objectPos;
 	};
+
+	virtual sf::FloatRect GetHitbox() {
+		return this->sprite.getGlobalBounds();
+	}
 
 	virtual void Move() = 0;
 	virtual void Update() = 0;

@@ -133,20 +133,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Blue.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Common.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Red.cpp" />
     <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="WaveManager.cpp" />
+    <ClCompile Include="Yellow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Blue.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Red.h" />
     <ClInclude Include="TestObject.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="WaveManager.h" />
+    <ClInclude Include="Yellow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -19,6 +19,18 @@
     <Filter Include="Pliki źródłowe\Main">
       <UniqueIdentifier>{65ebaaa9-a66c-47c7-9363-e9f4edc4a28a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Objects">
+      <UniqueIdentifier>{e67cc58a-2f13-4362-b4be-3c952eaf20b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Main">
+      <UniqueIdentifier>{8d311771-d01e-442d-bf3f-b273ac78f60f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Objects\Enemies">
+      <UniqueIdentifier>{4b4d991a-c12a-4ecc-a55f-562512f08977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Objects\Enemies">
+      <UniqueIdentifier>{9979f9b0-fa06-45d6-96c1-61d4e0cccce3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp">
@@ -39,25 +51,61 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe\Main</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Pliki źródłowe\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveManager.cpp">
+      <Filter>Pliki źródłowe\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Blue.cpp">
+      <Filter>Pliki źródłowe\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Red.cpp">
+      <Filter>Pliki źródłowe\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Pliki źródłowe\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Yellow.cpp">
+      <Filter>Pliki źródłowe\Objects\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="TestObject.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="GameObject.h">
+      <Filter>Pliki nagłówkowe\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Pliki nagłówkowe\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Pliki nagłówkowe\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Pliki nagłówkowe\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Red.h">
+      <Filter>Pliki nagłówkowe\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveManager.h">
+      <Filter>Pliki nagłówkowe\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Blue.h">
+      <Filter>Pliki nagłówkowe\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Pliki nagłówkowe\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Yellow.h">
+      <Filter>Pliki nagłówkowe\Objects\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
