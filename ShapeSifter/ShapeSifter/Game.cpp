@@ -121,6 +121,18 @@ void Game::PauseGame()
 	}
 }
 
+void Game::UpdateMusic()
+{
+	if (this->music.getStatus() == sf::Sound::Stopped) {
+		int random = rand() % 3;
+		if (!music.openFromFile(songList[random])) {
+			std::cout << "Song not found\n";
+		}
+		std::cout << "Song changed\n";
+		music.play();
+	}
+}
+
 void Game::UpdateEventPolls()
 {
 	while (this->gameWindow->pollEvent(ev))
@@ -211,6 +223,8 @@ void Game::Update()
 		this->waveManager->Update();
 
 		this->backgroundImage->Update();
+
+		this->UpdateMusic();
 
 		//Player related
 		if (this->player->GetBulletCall()) {

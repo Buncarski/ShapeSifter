@@ -20,6 +20,7 @@ private:
 
 	int enemySpawnCount[3]; // 0 - Red, 1 - Blue, 2 - Yellow
 	int playerDamageTaken[3]; // 0 - Red, 1 - Blue, 2 - Yellow
+	int maxDiffEnemy;
 
 	float respawnTimer;
 	float respawnTimerMod;
@@ -28,7 +29,7 @@ private:
 	std::vector<Enemy*>* enemies;
 
 	char directions[4] = { 'N','S','W','E' };
-	char enemyType[3] = { 'R','B','Y' };
+	//char enemyType[3] = { 'R','B','Y' };
 
 	void InitVars(std::vector<Enemy*>& enemy_ref, Player& player_ref);
 public:

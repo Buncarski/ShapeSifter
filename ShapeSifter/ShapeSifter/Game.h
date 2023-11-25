@@ -29,8 +29,8 @@ private:
 	std::vector<Bullet*> bullets;
 	std::vector<Enemy*> enemies;
 	UI* ui;
-	char directions[4] = { 'N','S','W','E' };
-	char enemyType[3] = { 'R','B','Y' };
+	//char directions[4] = { 'N','S','W','E' };
+	//char enemyType[3] = { 'R','B','Y' };
 	
 	std::string songList[3] = {"Sfx/Music/song_0.ogg", "Sfx/Music/song_1.ogg", "Sfx/Music/song_2.ogg"};
 	sf::Music music;
@@ -66,6 +66,7 @@ public:
 	void Run();
 	void PauseGame();
 
+	void UpdateMusic();
 	void UpdateEventPolls();
 	void UpdateBullets();
 	void UpdateEnemies();

@@ -20,8 +20,10 @@ void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, Player& player_ref)
 
 	//
 	for (int esc : enemySpawnCount) esc = 0;
+	for (int pdt : playerDamageTaken) pdt = 0;
 
 	this->weightManipulationMod = .95f;
+	this->maxDiffEnemy = 1;
 }
 
 WaveManager::WaveManager(std::vector<Enemy*>* enemy_ref, Player* player_ref)
@@ -31,6 +33,7 @@ WaveManager::WaveManager(std::vector<Enemy*>* enemy_ref, Player* player_ref)
 
 WaveManager::~WaveManager()
 {
+
 }
 
 int WaveManager::GetCurrentWave()
@@ -78,10 +81,46 @@ void WaveManager::resetDifficultyDeterminingVariables()
 
 void WaveManager::UpdateSpawnWeights() {
 	float maxSpawnChance = fmaxf(spawnCutoff_red, fmaxf(spawnCutoff_blue, spawnCutoff_yellow));
-	if (maxSpawnChance == spawnCutoff_red) {
+
+	if (this->currentWave < 5) {
+		std::cout << "wave below 5\n";
 		spawnCutoff_red *= weightManipulationMod;
-		spawnCutoff_blue = (1.f - spawnCutoff_red)/2.f;
+		spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
 		spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+		return;
+	}
+	
+	if (player_ref->GetHp() >= 7) {
+		std::cout << "health above 6\n";
+		spawnCutoff_red *= weightManipulationMod;
+		spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
+		spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+		return;
+	}
+
+	if (playerDamageTaken[0] + playerDamageTaken[1] + playerDamageTaken[2] == 0) {
+		std::cout << "player not hit \n";
+		spawnCutoff_red *= weightManipulationMod;
+		spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
+		spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+		return;
+	}
+
+	if (playerDamageTaken[0] > 0) {
+		std::cout << "player hit by red\n";
+		return;
+	}
+
+	if (playerDamageTaken[1] > 0 || playerDamageTaken[2] > 0) {
+		std::cout << "player hit by other\n";
+		if (player_ref->GetHp() <= 3) {
+			std::cout << "player below 3 hp\n";
+			spawnCutoff_red *= (1.f + (1.f - weightManipulationMod));
+			spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
+			spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+			return;
+		}
+		else return;
 	}
 }
 
@@ -146,6 +185,6 @@ void WaveManager::Update()
 	if (waveHealth <= 0) {
 		NextWave();
 	}
-	std::cout << "Red: " << playerDamageTaken[0] << " Blue: " << playerDamageTaken[1] << " Yellow: " << playerDamageTaken[2] << "\n";
+	//std::cout << "Red: " << playerDamageTaken[0] << " Blue: " << playerDamageTaken[1] << " Yellow: " << playerDamageTaken[2] << "\n";
 	spawnEnemy();
 }
