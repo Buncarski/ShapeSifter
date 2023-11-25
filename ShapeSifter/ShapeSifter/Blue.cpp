@@ -35,6 +35,8 @@ void Blue::InitVars(GameObject& target, char direction)
 	//Sounds
 	sound.setBuffer(buffer);
 	sound.setVolume(30.f);
+
+	this->type = 'B';
 }
 
 void Blue::InitTexture(std::string texturePath)

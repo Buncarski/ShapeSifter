@@ -10,7 +10,7 @@ void Game::initWindow()
 
 void Game::initObject()
 {
-	this->testObject = new TestObject();
+	this->backgroundImage = new TestObject();
 	this->player = new Player();
 }
 
@@ -72,7 +72,7 @@ Game::~Game()
 	for (Bullet* b : bullets) delete b;
 	for (Enemy* e : enemies) delete e;
 	delete this->player;
-	delete this->testObject;
+	delete this->backgroundImage;
 	delete this->waveManager;
 }
 
@@ -161,11 +161,12 @@ void Game::UpdateEnemies()
 
 	//Remove
 	for (Enemy* e : enemies) {
-		if (e->GetHitbox().intersects(player->GetHitbox())) {
+		if (e->GetHitbox().intersects(player->GetHitbox())) { //On player collision
 			player->TakeDamage(1);
+			waveManager->addDamageTaken(e->GetEnemyType());
 			enemies.erase(enemies.begin() + iter_enemy);
 			delete e;
-		} else if (e->GetHp() <= 0) {
+		} else if (e->GetHp() <= 0) { //On death
 			sfx_destroy.play();
 			enemies.erase(enemies.begin() + iter_enemy);
 			delete e;
@@ -209,7 +210,7 @@ void Game::Update()
 
 		this->waveManager->Update();
 
-		this->testObject->Update();
+		this->backgroundImage->Update();
 
 		//Player related
 		if (this->player->GetBulletCall()) {
@@ -235,18 +236,19 @@ void Game::Render()
 {
 	this->gameWindow->clear();
 
-	this->testObject->Render(this->gameWindow);
+	this->backgroundImage->Render(this->gameWindow);
 
 	if (bullets.size() > 0) {
 		for (GameObject* b : bullets) {
 			b->Render(this->gameWindow);
 		}
 	}
-	this->player->Render(this->gameWindow);
 
 	for (Enemy* e : enemies) {
 		e->Render(this->gameWindow);
 	}
+
+	this->player->Render(this->gameWindow);
 
 	this->ui->Render(this->gameWindow);
 

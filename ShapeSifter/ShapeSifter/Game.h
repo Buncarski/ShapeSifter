@@ -24,7 +24,7 @@ private:
 
 	//Game Objects
 	WaveManager* waveManager;
-	GameObject* testObject;
+	GameObject* backgroundImage;
 	Player* player;
 	std::vector<Bullet*> bullets;
 	std::vector<Enemy*> enemies;

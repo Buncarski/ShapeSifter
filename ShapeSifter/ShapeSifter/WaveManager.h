@@ -16,18 +16,23 @@ private:
 	float spawnCutoff_blue;
 	float spawnCutoff_yellow;
 
+	float weightManipulationMod;
+
+	int enemySpawnCount[3]; // 0 - Red, 1 - Blue, 2 - Yellow
+	int playerDamageTaken[3]; // 0 - Red, 1 - Blue, 2 - Yellow
+
 	float respawnTimer;
 	float respawnTimerMod;
 	
-	GameObject* player_ref;
+	Player* player_ref;
 	std::vector<Enemy*>* enemies;
 
 	char directions[4] = { 'N','S','W','E' };
 	char enemyType[3] = { 'R','B','Y' };
 
-	void InitVars(std::vector<Enemy*>& enemy_ref, GameObject& player_ref);
+	void InitVars(std::vector<Enemy*>& enemy_ref, Player& player_ref);
 public:
-	WaveManager(std::vector<Enemy*>* enemy_ref, GameObject* player_ref);
+	WaveManager(std::vector<Enemy*>* enemy_ref, Player* player_ref);
 	virtual ~WaveManager();
 
 	int GetCurrentWave();
@@ -36,7 +41,10 @@ public:
 	void SetWaveHealth();
 	std::vector<Enemy*> GetEnemyVector();
 
+	void addDamageTaken(char enemyType);
+	void resetDifficultyDeterminingVariables();
 
+	void UpdateSpawnWeights();
 	void NextWave();
 	void damageWave(int damage);
 	void ResetWave();

@@ -104,6 +104,11 @@ sf::FloatRect Enemy::GetHitbox()
 	return this->hitbox.getGlobalBounds();
 }
 
+char Enemy::GetEnemyType()
+{
+	return this->type;
+}
+
 void Enemy::dealDamage(int damage)
 {
 	this->hp -= damage;

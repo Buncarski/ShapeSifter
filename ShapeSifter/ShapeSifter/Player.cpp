@@ -3,7 +3,7 @@
 void Player::InitVars()
 {
 	this->maxHp = 10;
-	this->playerHp = 2;
+	this->playerHp = 5;
 	this->bulletReshootTime = .0f;
 	this->SetPos(window_x/2 - 32, window_y/2 - 32);
 	this->BulletShot = false;

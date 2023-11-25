@@ -35,6 +35,8 @@ void Red::InitVars(GameObject& target, char direction)
 	//Sounds
 	sound.setBuffer(buffer);
 	sound.setVolume(30.f);
+
+	this->type = 'R';
 }
 
 void Red::InitTexture(std::string texturePath)

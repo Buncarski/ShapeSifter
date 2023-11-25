@@ -8,6 +8,7 @@ protected:
 	int maxHp;
 	int hp;
 	float flinchResistance;
+	char type;
 
 	sf::Vector2f movementVector;
 	sf::Vector2f movementModVector; //Vector for any additional modifications to the movement vector (for e.g. knockback)
@@ -37,6 +38,7 @@ public:
 	virtual int GetHp();
 	virtual void setMovementDirection();
 	virtual sf::FloatRect GetHitbox() override;
+	virtual char GetEnemyType();
 
 	virtual void dealDamage(int damage);
 

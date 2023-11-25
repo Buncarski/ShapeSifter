@@ -36,6 +36,8 @@ void Yellow::InitVars(GameObject& target, char direction)
 	//Sounds
 	sound.setBuffer(buffer);
 	sound.setVolume(30.f);
+
+	this->type = 'Y';
 }
 
 void Yellow::InitTexture(std::string texturePath)
