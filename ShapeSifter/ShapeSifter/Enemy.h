@@ -35,7 +35,9 @@ public:
 	virtual ~Enemy();
 
 	//Functions
+	virtual void Logic();
 	virtual int GetHp();
+	virtual sf::Vector2f GetObjectTargetVector(); //Gets normalized vector between Object and Target
 	virtual void setMovementDirection();
 	virtual sf::FloatRect GetHitbox() override;
 	virtual char GetEnemyType();

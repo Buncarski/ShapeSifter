@@ -1,3 +1,6 @@
-﻿  Game.cpp
+﻿  UI.cpp
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\UI.cpp(54,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  WaveManager.cpp
+  Generating Code...
   ShapeSifter.vcxproj -> D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\x64\Debug\ShapeSifter.exe

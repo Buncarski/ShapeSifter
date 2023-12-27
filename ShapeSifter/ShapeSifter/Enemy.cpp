@@ -73,14 +73,17 @@ Enemy::~Enemy()
 	delete this->damagedTex;
 }
 
+void Enemy::Logic()
+{
+}
+
 int Enemy::GetHp()
 {
 	return this->hp;
 }
 
-void Enemy::setMovementDirection()
+sf::Vector2f Enemy::GetObjectTargetVector()
 {
-
 	float current_x = this->GetPos().x;
 	float current_y = this->GetPos().y;
 
@@ -89,8 +92,24 @@ void Enemy::setMovementDirection()
 
 	float vecLength = sqrt((target_x * target_x) + (target_y * target_y));
 
-	this->movementVector.x = ((target_x / vecLength) * this->movementSpeed);
-	this->movementVector.y = ((target_y / vecLength) * this->movementSpeed);
+	return sf::Vector2f(target_x/vecLength, target_y/vecLength);
+}
+
+void Enemy::setMovementDirection()
+{
+
+	/*float current_x = this->GetPos().x;
+	float current_y = this->GetPos().y;
+
+	float target_x = this->target->GetPos().x - current_x;
+	float target_y = this->target->GetPos().y - current_y;
+
+	float vecLength = sqrt((target_x * target_x) + (target_y * target_y));*/
+
+	sf::Vector2f objectTargetVector = this->GetObjectTargetVector();
+
+	this->movementVector.x = (objectTargetVector.x * this->movementSpeed);
+	this->movementVector.y = (objectTargetVector.y * this->movementSpeed);
 
 	//Knockback falloff
 	if (movementModVector.x < .05f && movementModVector.x > -0.05f) movementModVector.x = .0f;

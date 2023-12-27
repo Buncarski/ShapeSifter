@@ -19,6 +19,7 @@ public:
 	//Functions
 	virtual void dealDamage(int damage) override;
 
+	virtual void Logic() override;
 	virtual void Move();
 	virtual void Update();
 	virtual void Render(sf::RenderTarget* target);

@@ -1,0 +1,13 @@
+﻿  Yellow.cpp
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(8,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(11,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(11,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(14,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(17,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(17,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating code
+  1 of 416 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ShapeSifter.vcxproj -> D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\x64\Release\ShapeSifter.exe

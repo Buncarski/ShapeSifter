@@ -7,9 +7,9 @@ void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, Player& player_ref)
 	this->waveHealth = 3 * currentWave;
 	this->maxEnemyCount = 5;
 
-	this->spawnCutoff_red = 1.f;
+	this->spawnCutoff_red = .0f;
 	this->spawnCutoff_blue = .0f;
-	this->spawnCutoff_yellow = .0f;
+	this->spawnCutoff_yellow = 1.0f;
 
 	//Refs
 	this->enemies = &enemy_ref;
@@ -90,11 +90,12 @@ void WaveManager::UpdateSpawnWeights() {
 		return;
 	}
 	
-	if (player_ref->GetHp() >= 7) {
+	if (player_ref->GetHp() >= 4) {
 		std::cout << "health above 6\n";
 		spawnCutoff_red *= weightManipulationMod;
 		spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
 		spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+		std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
 		return;
 	}
 
@@ -103,11 +104,13 @@ void WaveManager::UpdateSpawnWeights() {
 		spawnCutoff_red *= weightManipulationMod;
 		spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
 		spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+		std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
 		return;
 	}
 
 	if (playerDamageTaken[0] > 0) {
 		std::cout << "player hit by red\n";
+		std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
 		return;
 	}
 
@@ -118,10 +121,11 @@ void WaveManager::UpdateSpawnWeights() {
 			spawnCutoff_red *= (1.f + (1.f - weightManipulationMod));
 			spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
 			spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+			std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
 			return;
 		}
-		else return;
 	}
+	std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
 }
 
 void WaveManager::NextWave()

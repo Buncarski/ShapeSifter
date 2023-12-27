@@ -89,6 +89,11 @@ void Blue::dealDamage(int damage)
 	}
 }
 
+void Blue::Logic()
+{
+
+}
+
 void Blue::Move()
 {
 	this->objectPos.x = this->objectPos.x + this->movementVector.x + movementModVector.x;
@@ -102,6 +107,7 @@ void Blue::Move()
 
 void Blue::Update()
 {
+	this->Logic();
 	this->Move();
 }
 

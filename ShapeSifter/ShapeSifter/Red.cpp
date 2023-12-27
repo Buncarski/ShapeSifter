@@ -89,6 +89,11 @@ void Red::dealDamage(int damage)
 	}
 }
 
+void Red::Logic()
+{
+
+}
+
 void Red::Move()
 {
 	this->objectPos.x = this->objectPos.x + this->movementVector.x + movementModVector.x;
@@ -102,6 +107,7 @@ void Red::Move()
 
 void Red::Update()
 {
+	this->Logic();
 	this->Move();
 }
 

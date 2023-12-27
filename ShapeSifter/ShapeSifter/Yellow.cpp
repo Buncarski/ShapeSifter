@@ -2,6 +2,7 @@
 
 void Yellow::InitVars(GameObject& target, char direction)
 {
+
 	switch (direction) {
 	case 'N':
 		this->SetPos(rand() % window_x, -32.f);
@@ -38,6 +39,17 @@ void Yellow::InitVars(GameObject& target, char direction)
 	sound.setVolume(30.f);
 
 	this->type = 'Y';
+
+	//Behavioral stuff
+	this->behavior = AGGRESSIVE;
+	this->dodgeTimer = .0f;
+	this->setMovementDirection();
+
+	
+	this->detector.setPosition(this->GetPos().x + this->GetObjectTargetVector().x * 100.f, 
+		this->GetPos().y + this->GetObjectTargetVector().y * 100.f);
+	this->detector.setFillColor(sf::Color::Red);
+	this->detector.setSize(sf::Vector2f(44.f, 44.f));
 }
 
 void Yellow::InitTexture(std::string texturePath)
@@ -67,7 +79,6 @@ Yellow::Yellow()
 Yellow::Yellow(GameObject* target, char direction)
 {
 	this->InitVars(*target, direction);
-	this->setMovementDirection();
 }
 
 Yellow::~Yellow()
@@ -92,13 +103,24 @@ void Yellow::dealDamage(int damage)
 	}
 }
 
+void Yellow::Logic()
+{
+	
+}
+
+sf::RectangleShape Yellow::GetDetector()
+{
+	return this->detector;
+}
+
 void Yellow::Move()
 {
 	this->objectPos.x = this->objectPos.x + this->movementVector.x + movementModVector.x;
 	this->objectPos.y = this->objectPos.y + this->movementVector.y + movementModVector.y;
 	this->sprite.setPosition(this->objectPos);
 	this->hitbox.setPosition(sf::Vector2f(this->objectPos.x + 8.f, this->objectPos.y + 8.f));
-
+	this->detector.setPosition(this->GetPos().x + this->GetObjectTargetVector().x * 100.f,
+		this->GetPos().y + this->GetObjectTargetVector().y * 100.f); 
 	this->setMovementDirection();
 }
 
@@ -110,4 +132,5 @@ void Yellow::Update()
 void Yellow::Render(sf::RenderTarget* target)
 {
 	target->draw(this->sprite);
+	target->draw(this->detector);
 }
