@@ -1,8 +1,8 @@
 #include "Yellow.h"
 
-void Yellow::InitVars(GameObject& target, char direction)
+void Yellow::InitVars(GameObject& target, std::vector<Bullet*>& bullet_ref, char direction)
 {
-
+	
 	switch (direction) {
 	case 'N':
 		this->SetPos(rand() % window_x, -32.f);
@@ -42,14 +42,19 @@ void Yellow::InitVars(GameObject& target, char direction)
 
 	//Behavioral stuff
 	this->behavior = AGGRESSIVE;
+	this->decision = DECISION_NONE;
+
 	this->dodgeTimer = .0f;
 	this->setMovementDirection();
+	this->fakeoutChance = .9f;
+	this->reDecideTimer = .0f;
 
 	
 	this->detector.setPosition(this->GetPos().x + this->GetObjectTargetVector().x * 100.f, 
 		this->GetPos().y + this->GetObjectTargetVector().y * 100.f);
 	this->detector.setFillColor(sf::Color::Red);
 	this->detector.setSize(sf::Vector2f(44.f, 44.f));
+	this->bullet_ref = &bullet_ref;
 }
 
 void Yellow::InitTexture(std::string texturePath)
@@ -76,13 +81,33 @@ Yellow::Yellow()
 {
 }
 
-Yellow::Yellow(GameObject* target, char direction)
+Yellow::Yellow(GameObject* target, std::vector<Bullet*>* bullet_ref, char direction)
 {
-	this->InitVars(*target, direction);
+	this->InitVars(*target, *bullet_ref, direction);
 }
 
 Yellow::~Yellow()
 {
+}
+
+sf::RectangleShape Yellow::GetDetector()
+{
+	return this->detector;
+}
+
+void Yellow::setMovementDirection()
+{
+	sf::Vector2f objectTargetVector = this->GetObjectTargetVector();
+
+	this->movementVector.x = (objectTargetVector.x * this->movementSpeed);
+	this->movementVector.y = (objectTargetVector.y * this->movementSpeed);
+
+	std::cout << dodgeTimer << "\n";
+	//Dodge falloff
+	if (dodgeVector.x < .05f && dodgeVector.x > -0.05f) dodgeVector.x = .0f;
+	if (dodgeVector.y < .05f && dodgeVector.y > -0.05f) dodgeVector.y = .0f;
+	if (dodgeVector.x != .0f) dodgeVector.x *= 0.95f;
+	if (dodgeVector.y != .0f) dodgeVector.y *= 0.95f;
 }
 
 void Yellow::dealDamage(int damage)
@@ -103,29 +128,74 @@ void Yellow::dealDamage(int damage)
 	}
 }
 
-void Yellow::Logic()
+
+void Yellow::UpdateDodgeVector()
 {
-	
+	//Timer update
+	if (this->dodgeTimer > 0.0f)
+		this->dodgeTimer -= 1.f / refreshRate;
 }
 
-sf::RectangleShape Yellow::GetDetector()
+void Yellow::Logic()
 {
-	return this->detector;
+	//Aggressive behavioral type
+	if (this->behavior == AGGRESSIVE) {
+		for (Bullet* b : *this->bullet_ref) {
+			if (this->detector.getGlobalBounds().intersects(b->GetHitbox())) {
+				if (this->dodgeTimer <= 0.0f) {
+					this->dodgeTimer = 1.f;
+					this->dodgeVector = this->movementVector * 2.f;
+					this->dodgeVector.x *= -1.f;
+					float tmp = dodgeVector.x;
+					this->dodgeVector.x = this->dodgeVector.y;
+					this->dodgeVector.y = tmp;
+				}
+			}
+		}
+	}
+	
+	//Fakeout behavioral type
+	if (this->behavior == FAKEOUT) {
+		//Is bullet in front of me? - decision tree node - yes
+		for (Bullet* b : *this->bullet_ref) {
+			if (this->detector.getGlobalBounds().intersects(b->GetHitbox())) {
+				if (this->dodgeTimer <= 0.0f) {
+					this->dodgeTimer = 1.f;
+					this->dodgeVector = this->movementVector * 2.f;
+					this->dodgeVector.x *= -1.f;
+					float tmp = dodgeVector.x;
+					this->dodgeVector.x = this->dodgeVector.y;
+					this->dodgeVector.y = tmp;
+				}
+				return;
+			}
+		}
+
+		//Is bullet in front of me? - decision tree node - no
+		if (this->detector.getGlobalBounds().intersects(this->target->GetHitbox())) {
+			this->MakeDecision();
+		}
+	}
 }
 
 void Yellow::Move()
 {
-	this->objectPos.x = this->objectPos.x + this->movementVector.x + movementModVector.x;
-	this->objectPos.y = this->objectPos.y + this->movementVector.y + movementModVector.y;
+	this->objectPos.x = this->objectPos.x + this->movementVector.x + movementModVector.x + this->dodgeVector.x;
+	this->objectPos.y = this->objectPos.y + this->movementVector.y + movementModVector.y + this->dodgeVector.y;
+	
+	//Sprite positions
 	this->sprite.setPosition(this->objectPos);
 	this->hitbox.setPosition(sf::Vector2f(this->objectPos.x + 8.f, this->objectPos.y + 8.f));
 	this->detector.setPosition(this->GetPos().x + this->GetObjectTargetVector().x * 100.f,
 		this->GetPos().y + this->GetObjectTargetVector().y * 100.f); 
+	
 	this->setMovementDirection();
+	this->UpdateDodgeVector();
 }
 
 void Yellow::Update()
 {
+	this->Logic();
 	this->Move();
 }
 
@@ -134,3 +204,4 @@ void Yellow::Render(sf::RenderTarget* target)
 	target->draw(this->sprite);
 	target->draw(this->detector);
 }
+

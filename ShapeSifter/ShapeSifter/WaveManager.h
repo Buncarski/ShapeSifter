@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Red.h"
 #include "Blue.h"
+#include "bullet.h"
 #include "Yellow.h"
 class WaveManager
 {
@@ -27,13 +28,14 @@ private:
 	
 	Player* player_ref;
 	std::vector<Enemy*>* enemies;
+	std::vector<Bullet*>* bullets;
 
 	char directions[4] = { 'N','S','W','E' };
 	//char enemyType[3] = { 'R','B','Y' };
 
-	void InitVars(std::vector<Enemy*>& enemy_ref, Player& player_ref);
+	void InitVars(std::vector<Enemy*>& enemy_ref, std::vector<Bullet*>& bullet_ref, Player& player_ref);
 public:
-	WaveManager(std::vector<Enemy*>* enemy_ref, Player* player_ref);
+	WaveManager(std::vector<Enemy*>* enemy_ref, std::vector<Bullet*>* bullet_ref, Player* player_ref);
 	virtual ~WaveManager();
 
 	int GetCurrentWave();

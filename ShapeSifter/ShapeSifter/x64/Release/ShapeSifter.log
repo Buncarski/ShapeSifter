@@ -1,13 +1,21 @@
-﻿  Yellow.cpp
+﻿  Game.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
+  UI.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
+D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\UI.cpp(54,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  WaveManager.cpp
+  Yellow.cpp
 D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(8,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(11,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(11,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(14,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(17,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\ShapeSifter\Yellow.cpp(17,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  main.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
   Generating code
-  1 of 416 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  4 of 418 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    19 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   ShapeSifter.vcxproj -> D:\Storage Files\Documents\GitHub\ShapeSifter\ShapeSifter\x64\Release\ShapeSifter.exe

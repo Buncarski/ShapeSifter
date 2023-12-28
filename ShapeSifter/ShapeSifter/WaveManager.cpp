@@ -1,7 +1,7 @@
 #include "WaveManager.h"
 #include <iostream>
 
-void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, Player& player_ref)
+void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, std::vector<Bullet*>& bullet_ref, Player& player_ref)
 {
 	this->currentWave = 1;
 	this->waveHealth = 3 * currentWave;
@@ -14,6 +14,7 @@ void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, Player& player_ref)
 	//Refs
 	this->enemies = &enemy_ref;
 	this->player_ref = &player_ref;
+	this->bullets = &bullet_ref;
 
 	this->respawnTimer = .5f;
 	this->respawnTimerMod = 0.f;
@@ -26,9 +27,9 @@ void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, Player& player_ref)
 	this->maxDiffEnemy = 1;
 }
 
-WaveManager::WaveManager(std::vector<Enemy*>* enemy_ref, Player* player_ref)
+WaveManager::WaveManager(std::vector<Enemy*>* enemy_ref, std::vector<Bullet*>* bullet_ref, Player* player_ref)
 {
-	this->InitVars(*enemy_ref, *player_ref);
+	this->InitVars(*enemy_ref, *bullet_ref, *player_ref);
 }
 
 WaveManager::~WaveManager()
@@ -174,7 +175,7 @@ void WaveManager::spawnEnemy()
 		this->enemySpawnCount[1]++; //Spawn Blue
 	}
 	else {
-		enemies->push_back(new Yellow(this->player_ref, this->directions[direction]));
+		enemies->push_back(new Yellow(this->player_ref, this->bullets, this->directions[direction]));
 		this->enemySpawnCount[2]++; //Spawn Yellow
 	}
 

@@ -17,7 +17,7 @@ void Game::initObject()
 void Game::initMisc()
 {
 	//Init WaveManager
-	this->waveManager = new WaveManager(&this->enemies, this->player);
+	this->waveManager = new WaveManager(&this->enemies, &this->bullets, this->player);
 
 	//Init UI
 	this->ui = new UI(this->waveManager, this->player, &this->isPaused);
