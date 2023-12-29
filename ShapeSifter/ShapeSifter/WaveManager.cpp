@@ -7,9 +7,9 @@ void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, std::vector<Bullet*>&
 	this->waveHealth = 3 * currentWave;
 	this->maxEnemyCount = 5;
 
-	this->spawnCutoff_red = .0f;
+	this->spawnCutoff_red = 1.0f;
 	this->spawnCutoff_blue = .0f;
-	this->spawnCutoff_yellow = 1.0f;
+	this->spawnCutoff_yellow = .0f;
 
 	//Refs
 	this->enemies = &enemy_ref;

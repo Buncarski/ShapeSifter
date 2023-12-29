@@ -41,7 +41,8 @@ void Yellow::InitVars(GameObject& target, std::vector<Bullet*>& bullet_ref, char
 	this->type = 'Y';
 
 	//Behavioral stuff
-	this->behavior = AGGRESSIVE;
+	int behaviorDecider = rand() % 2;
+	this->behavior = behaviorDecider;
 	this->decision = DECISION_NONE;
 
 	this->dodgeTimer = .0f;
@@ -55,6 +56,8 @@ void Yellow::InitVars(GameObject& target, std::vector<Bullet*>& bullet_ref, char
 	this->detector.setFillColor(sf::Color::Red);
 	this->detector.setSize(sf::Vector2f(44.f, 44.f));
 	this->bullet_ref = &bullet_ref;
+
+	std::cout << behavior << "\n";
 }
 
 void Yellow::InitTexture(std::string texturePath)
@@ -97,12 +100,14 @@ sf::RectangleShape Yellow::GetDetector()
 
 void Yellow::setMovementDirection()
 {
+	if (this->decision == DECISION_FAKEOUT) return;
+
 	sf::Vector2f objectTargetVector = this->GetObjectTargetVector();
 
 	this->movementVector.x = (objectTargetVector.x * this->movementSpeed);
 	this->movementVector.y = (objectTargetVector.y * this->movementSpeed);
 
-	std::cout << dodgeTimer << "\n";
+	//std::cout << dodgeTimer << "\n";
 	//Dodge falloff
 	if (dodgeVector.x < .05f && dodgeVector.x > -0.05f) dodgeVector.x = .0f;
 	if (dodgeVector.y < .05f && dodgeVector.y > -0.05f) dodgeVector.y = .0f;
@@ -136,8 +141,34 @@ void Yellow::UpdateDodgeVector()
 		this->dodgeTimer -= 1.f / refreshRate;
 }
 
+void Yellow::MakeDecision()
+{
+	float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	std::cout << r << "\n";
+	if (r <= fakeoutChance) {
+		this->decision = DECISION_FAKEOUT;
+
+		this->movementVector.x *= -2.f;
+		float tmp = movementVector.x;
+		this->movementVector.x = this->movementVector.y;
+		this->movementVector.y = tmp;
+	}
+	else {
+		this->decision = DECISION_COMMIT;
+	}
+	this->reDecideTimer = 2.f;
+}
+
 void Yellow::Logic()
 {
+	if (reDecideTimer > 0.0f) {
+		reDecideTimer -= 1.5f/refreshRate;
+	}
+
+	if (reDecideTimer <= 0.0f) {
+		this->decision = DECISION_NONE;
+	}
+
 	//Aggressive behavioral type
 	if (this->behavior == AGGRESSIVE) {
 		for (Bullet* b : *this->bullet_ref) {
@@ -173,16 +204,27 @@ void Yellow::Logic()
 
 		//Is bullet in front of me? - decision tree node - no
 		if (this->detector.getGlobalBounds().intersects(this->target->GetHitbox())) {
-			this->MakeDecision();
+			if (this->reDecideTimer <= 0.f) {
+				this->MakeDecision();
+			}
 		}
 	}
 }
 
 void Yellow::Move()
 {
-	this->objectPos.x = this->objectPos.x + this->movementVector.x + movementModVector.x + this->dodgeVector.x;
-	this->objectPos.y = this->objectPos.y + this->movementVector.y + movementModVector.y + this->dodgeVector.y;
-	
+
+	if (this->decision == DECISION_FAKEOUT) {
+
+		this->objectPos.x = this->objectPos.x + this->movementVector.x + this->dodgeVector.x;
+		this->objectPos.y = this->objectPos.y + this->movementVector.y + this->dodgeVector.y;
+	}
+	else {
+		this->movementModVector *= 0.f;
+		this->objectPos.x = this->objectPos.x + this->movementVector.x + this->dodgeVector.x;
+		this->objectPos.y = this->objectPos.y + this->movementVector.y + this->dodgeVector.y;
+	}
+
 	//Sprite positions
 	this->sprite.setPosition(this->objectPos);
 	this->hitbox.setPosition(sf::Vector2f(this->objectPos.x + 8.f, this->objectPos.y + 8.f));
