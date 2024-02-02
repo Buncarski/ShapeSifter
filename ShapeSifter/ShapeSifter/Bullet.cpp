@@ -6,6 +6,7 @@ void Bullet::InitVars()
 	
 	this->mouseX -= center_x;
 	this->mouseY -= center_y;
+	this->hitTarget = false;
 
 	float vecLength = sqrt((mouseX * mouseX) + (mouseY * mouseY));
 	this->movementSpeed = 6.0f;
@@ -53,6 +54,16 @@ Bullet::~Bullet()
 int Bullet::GetDamage()
 {
 	return this->damage;
+}
+
+bool Bullet::GetHitTarget()
+{
+	return hitTarget;
+}
+
+void Bullet::SetToDestroy()
+{
+	this->hitTarget = true;
 }
 
 void Bullet::Move()

@@ -5,6 +5,7 @@ class Bullet: public GameObject
 private:
 	float mouseX;
 	float mouseY;
+	bool hitTarget;
 
 	sf::Vector2f movementVector;
 	int damage;
@@ -22,6 +23,8 @@ public:
 
 	//Functions
 	virtual int GetDamage();
+	virtual bool GetHitTarget();
+	virtual void SetToDestroy();
 
 	virtual void Move() override;
 	virtual void Update() override;

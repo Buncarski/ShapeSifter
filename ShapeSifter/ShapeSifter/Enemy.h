@@ -8,6 +8,7 @@ protected:
 	int maxHp;
 	int hp;
 	float flinchResistance;
+	char type;
 
 	sf::Vector2f movementVector;
 	sf::Vector2f movementModVector; //Vector for any additional modifications to the movement vector (for e.g. knockback)
@@ -22,6 +23,8 @@ protected:
 	sf::Texture* damagedTex;
 	sf::Sprite damagedSprite;
 
+	bool destroy;
+
 	//Init functions
 	virtual void InitVars(GameObject& target, char direction);
 	virtual void InitTexture(std::string texturePath);
@@ -34,9 +37,15 @@ public:
 	virtual ~Enemy();
 
 	//Functions
+	virtual void Logic();
 	virtual int GetHp();
+	virtual sf::Vector2f GetObjectTargetVector(); //Gets normalized vector between Object and Target
+	virtual sf::Vector2f GetObjectTargetVector(sf::Vector2f targetPos); //Gets normalized vector between Object and Target Pos
 	virtual void setMovementDirection();
 	virtual sf::FloatRect GetHitbox() override;
+	virtual char GetEnemyType();
+	virtual bool GetDestroyCall();
+	virtual void SetDestroyCall();
 
 	virtual void dealDamage(int damage);
 

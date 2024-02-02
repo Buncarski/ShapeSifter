@@ -18,7 +18,7 @@ void Blue::InitVars(GameObject& target, char direction)
 	}
 	this->target = &target;
 	this->movementSpeed = .7f;
-	this->maxHp = 15;
+	this->maxHp = 12;
 	this->hp = this->maxHp;
 	this->flinchResistance = .5f;
 
@@ -35,6 +35,8 @@ void Blue::InitVars(GameObject& target, char direction)
 	//Sounds
 	sound.setBuffer(buffer);
 	sound.setVolume(30.f);
+
+	this->type = 'B';
 }
 
 void Blue::InitTexture(std::string texturePath)
@@ -87,6 +89,11 @@ void Blue::dealDamage(int damage)
 	}
 }
 
+void Blue::Logic()
+{
+
+}
+
 void Blue::Move()
 {
 	this->objectPos.x = this->objectPos.x + this->movementVector.x + movementModVector.x;
@@ -100,6 +107,7 @@ void Blue::Move()
 
 void Blue::Update()
 {
+	this->Logic();
 	this->Move();
 }
 

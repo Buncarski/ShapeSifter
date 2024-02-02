@@ -22,7 +22,7 @@ void Enemy::InitVars(GameObject& target, char direction)
 	this->maxHp = 5;
 	this->hp = this->maxHp;
 	this->flinchResistance = 2.f;
-
+	this->destroy = false;
 	this->InitTexture("Graphics/red_circle.png");
 	this->InitSprite();
 
@@ -73,14 +73,17 @@ Enemy::~Enemy()
 	delete this->damagedTex;
 }
 
+void Enemy::Logic()
+{
+}
+
 int Enemy::GetHp()
 {
 	return this->hp;
 }
 
-void Enemy::setMovementDirection()
+sf::Vector2f Enemy::GetObjectTargetVector()
 {
-
 	float current_x = this->GetPos().x;
 	float current_y = this->GetPos().y;
 
@@ -89,8 +92,29 @@ void Enemy::setMovementDirection()
 
 	float vecLength = sqrt((target_x * target_x) + (target_y * target_y));
 
-	this->movementVector.x = ((target_x / vecLength) * this->movementSpeed);
-	this->movementVector.y = ((target_y / vecLength) * this->movementSpeed);
+	return sf::Vector2f(target_x/vecLength, target_y/vecLength);
+}
+
+sf::Vector2f Enemy::GetObjectTargetVector(sf::Vector2f targetPos)
+{
+	return this->GetObjectTargetVector();
+}
+
+void Enemy::setMovementDirection()
+{
+
+	/*float current_x = this->GetPos().x;
+	float current_y = this->GetPos().y;
+
+	float target_x = this->target->GetPos().x - current_x;
+	float target_y = this->target->GetPos().y - current_y;
+
+	float vecLength = sqrt((target_x * target_x) + (target_y * target_y));*/
+
+	sf::Vector2f objectTargetVector = this->GetObjectTargetVector();
+
+	this->movementVector.x = (objectTargetVector.x * this->movementSpeed);
+	this->movementVector.y = (objectTargetVector.y * this->movementSpeed);
 
 	//Knockback falloff
 	if (movementModVector.x < .05f && movementModVector.x > -0.05f) movementModVector.x = .0f;
@@ -102,6 +126,21 @@ void Enemy::setMovementDirection()
 sf::FloatRect Enemy::GetHitbox()
 {
 	return this->hitbox.getGlobalBounds();
+}
+
+char Enemy::GetEnemyType()
+{
+	return this->type;
+}
+
+bool Enemy::GetDestroyCall()
+{
+	return this->destroy;
+}
+
+void Enemy::SetDestroyCall()
+{
+	this->destroy = true;
 }
 
 void Enemy::dealDamage(int damage)

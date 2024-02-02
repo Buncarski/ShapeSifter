@@ -10,14 +10,14 @@ void Game::initWindow()
 
 void Game::initObject()
 {
-	this->testObject = new TestObject();
+	this->backgroundImage = new TestObject();
 	this->player = new Player();
 }
 
 void Game::initMisc()
 {
 	//Init WaveManager
-	this->waveManager = new WaveManager(&this->enemies, this->player);
+	this->waveManager = new WaveManager(&this->enemies, &this->bullets, this->player);
 
 	//Init UI
 	this->ui = new UI(this->waveManager, this->player, &this->isPaused);
@@ -72,7 +72,7 @@ Game::~Game()
 	for (Bullet* b : bullets) delete b;
 	for (Enemy* e : enemies) delete e;
 	delete this->player;
-	delete this->testObject;
+	delete this->backgroundImage;
 	delete this->waveManager;
 }
 
@@ -121,6 +121,18 @@ void Game::PauseGame()
 	}
 }
 
+void Game::UpdateMusic()
+{
+	if (this->music.getStatus() == sf::Sound::Stopped) {
+		int random = rand() % 3;
+		if (!music.openFromFile(songList[random])) {
+			std::cout << "Song not found\n";
+		}
+		std::cout << "Song changed\n";
+		music.play();
+	}
+}
+
 void Game::UpdateEventPolls()
 {
 	while (this->gameWindow->pollEvent(ev))
@@ -152,7 +164,7 @@ void Game::UpdateBullets() {
 
 void Game::UpdateEnemies()
 {
-	int iter_enemy = 0;
+	
 	//Update
 	for (Enemy* e : enemies) {
 		e->Update();
@@ -161,34 +173,51 @@ void Game::UpdateEnemies()
 
 	//Remove
 	for (Enemy* e : enemies) {
-		if (e->GetHitbox().intersects(player->GetHitbox())) {
+		if (e->GetHitbox().intersects(player->GetHitbox())) { //On player collision
 			player->TakeDamage(1);
-			enemies.erase(enemies.begin() + iter_enemy);
-			delete e;
-		} else if (e->GetHp() <= 0) {
+			waveManager->addDamageTaken(e->GetEnemyType());
+			e->SetDestroyCall();
+			
+		} else if (e->GetHp() <= 0) { //On death
 			sfx_destroy.play();
-			enemies.erase(enemies.begin() + iter_enemy);
-			delete e;
-
+			e->SetDestroyCall();
 			this->waveManager->damageWave(1);
 		}
+	}
+
+	int iter_enemy = 0;
+	for (Enemy* e : enemies) {
+		if (e->GetDestroyCall() == true) {
+			enemies.erase(enemies.begin() + iter_enemy);
+			delete e;
+		}
+		
 		iter_enemy++;
 	}
 }
 
 void Game::UpdateCollisions()
 {
-	int iter_bullet = 0;
 
 	for (Bullet* b : bullets) {
 		//Game checks if bullet hits enemy when bullet no longer exists
 		for (Enemy* e : enemies) {
 			if (b->GetHitbox().intersects(e->GetHitbox())) {
 				e->dealDamage(b->GetDamage());
-				bullets.erase(bullets.begin() + iter_bullet);
-				delete b;
+				b->SetToDestroy();
 				break;
 			}
+		}
+	}
+
+	int iter_bullet = 0;
+
+	for (Bullet* b : bullets) {
+		//Game checks if bullet hits enemy when bullet no longer exists
+		if (b->GetHitTarget() == true) {
+			bullets.erase(bullets.begin() + iter_bullet);
+			delete b;
+			break;
 		}
 		iter_bullet++;
 	}
@@ -209,7 +238,9 @@ void Game::Update()
 
 		this->waveManager->Update();
 
-		this->testObject->Update();
+		this->backgroundImage->Update();
+
+		this->UpdateMusic();
 
 		//Player related
 		if (this->player->GetBulletCall()) {
@@ -235,18 +266,19 @@ void Game::Render()
 {
 	this->gameWindow->clear();
 
-	this->testObject->Render(this->gameWindow);
+	this->backgroundImage->Render(this->gameWindow);
 
 	if (bullets.size() > 0) {
 		for (GameObject* b : bullets) {
 			b->Render(this->gameWindow);
 		}
 	}
-	this->player->Render(this->gameWindow);
 
 	for (Enemy* e : enemies) {
 		e->Render(this->gameWindow);
 	}
+
+	this->player->Render(this->gameWindow);
 
 	this->ui->Render(this->gameWindow);
 

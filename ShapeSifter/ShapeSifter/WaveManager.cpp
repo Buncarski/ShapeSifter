@@ -1,10 +1,10 @@
 #include "WaveManager.h"
 #include <iostream>
 
-void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, GameObject& player_ref)
+void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, std::vector<Bullet*>& bullet_ref, Player& player_ref)
 {
 	this->currentWave = 1;
-	this->waveHealth = 5 * currentWave;
+	this->waveHealth = 3 * currentWave;
 	this->maxEnemyCount = 5;
 
 	this->spawnCutoff_red = 1.f;
@@ -14,18 +14,27 @@ void WaveManager::InitVars(std::vector<Enemy*>& enemy_ref, GameObject& player_re
 	//Refs
 	this->enemies = &enemy_ref;
 	this->player_ref = &player_ref;
+	this->bullets = &bullet_ref;
 
-	this->respawnTimer = 2.f;
+	this->respawnTimer = .5f;
 	this->respawnTimerMod = 0.f;
+
+	//
+	for (int esc : enemySpawnCount) esc = 0;
+	for (int pdt : playerDamageTaken) pdt = 0;
+
+	this->weightManipulationMod = .95f;
+	this->maxDiffEnemy = 1;
 }
 
-WaveManager::WaveManager(std::vector<Enemy*>* enemy_ref, GameObject* player_ref)
+WaveManager::WaveManager(std::vector<Enemy*>* enemy_ref, std::vector<Bullet*>* bullet_ref, Player* player_ref)
 {
-	this->InitVars(*enemy_ref, *player_ref);
+	this->InitVars(*enemy_ref, *bullet_ref, *player_ref);
 }
 
 WaveManager::~WaveManager()
 {
+
 }
 
 int WaveManager::GetCurrentWave()
@@ -51,13 +60,87 @@ std::vector<Enemy*> WaveManager::GetEnemyVector()
 	return *this->enemies;
 }
 
+void WaveManager::addDamageTaken(char enemyType)
+{
+	switch (enemyType) {
+	case 'R': playerDamageTaken[0]++;
+		break;
+	case 'B': playerDamageTaken[1]++;
+		break;
+	case 'Y': playerDamageTaken[2]++;
+		break;
+	}
+}
+
+void WaveManager::resetDifficultyDeterminingVariables()
+{
+	for (int esc : enemySpawnCount) esc = 0;
+	this->playerDamageTaken[0] = 0;
+	this->playerDamageTaken[1] = 0;
+	this->playerDamageTaken[2] = 0;
+}
+
+void WaveManager::UpdateSpawnWeights() {
+	float maxSpawnChance = fmaxf(spawnCutoff_red, fmaxf(spawnCutoff_blue, spawnCutoff_yellow));
+
+	if (this->currentWave < 5) {
+		//std::cout << "wave below 5\n";
+		spawnCutoff_red *= weightManipulationMod;
+		spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
+		spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+		return;
+	}
+	
+	if (player_ref->GetHp() >= 4) {
+		//std::cout << "health above 6\n";
+		spawnCutoff_red *= weightManipulationMod;
+		spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
+		spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+		//std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
+		return;
+	}
+
+	if (playerDamageTaken[0] + playerDamageTaken[1] + playerDamageTaken[2] == 0) {
+		//std::cout << "player not hit \n";
+		spawnCutoff_red *= weightManipulationMod;
+		spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
+		spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+		//std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
+		return;
+	}
+
+	if (playerDamageTaken[0] > 0) {
+		//std::cout << "player hit by red\n";
+		//std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
+		return;
+	}
+
+	if (playerDamageTaken[1] > 0 || playerDamageTaken[2] > 0) {
+		//std::cout << "player hit by other\n";
+		if (player_ref->GetHp() <= 3) {
+			//std::cout << "player below 3 hp\n";
+			spawnCutoff_red *= (1.f + (1.f - weightManipulationMod));
+			spawnCutoff_blue = (1.f - spawnCutoff_red) / 2.f;
+			spawnCutoff_yellow = 1.f - spawnCutoff_red - spawnCutoff_blue;
+			//std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
+			return;
+		}
+	}
+	//std::cout << spawnCutoff_red << " " << spawnCutoff_blue << " " << spawnCutoff_yellow << "\n";
+}
+
 void WaveManager::NextWave()
 {
 	this->currentWave += 1;
-	this->waveHealth = 5 * currentWave;
+	this->waveHealth = 3 * currentWave;
+	if(this->GetCurrentWave() <= 7)
+	this->respawnTimerMod += 0.1f;
+
+	this->UpdateSpawnWeights();
+
+	this->resetDifficultyDeterminingVariables();
 	
-	
-	this->respawnTimerMod -= 1.f;
+	//this->respawnTimerMod -= 1.f;
 }
 
 void WaveManager::damageWave(int damage)
@@ -86,24 +169,29 @@ void WaveManager::spawnEnemy()
 	int direction = rand() % 4;
 	
 	if (r <= spawnCutoff_red) {
-		enemies->push_back(new Red(this->player_ref, this->directions[direction]));
+		enemies->push_back(new Red(this->player_ref, this->enemies, this->directions[direction]));
+		this->enemySpawnCount[0]++; //Spawn Red
 	}
 	else if (r > spawnCutoff_red && r <= spawnCutoff_red + spawnCutoff_blue) {
 		enemies->push_back(new Blue(this->player_ref, this->directions[direction]));
+		this->enemySpawnCount[1]++; //Spawn Blue
 	}
 	else {
-		enemies->push_back(new Yellow(this->player_ref, this->directions[direction]));
+		enemies->push_back(new Yellow(this->player_ref, this->bullets, this->directions[direction]));
+		this->enemySpawnCount[2]++; //Spawn Yellow
 	}
 
-	this->respawnTimer += 2.f + this->respawnTimerMod;
-	std::cout << respawnTimer << "\n";
+	this->respawnTimer += (2.f - this->respawnTimerMod);
+	//std::cout << respawnTimer << "\n";
 }
+
+
 
 void WaveManager::Update()
 {
 	if (waveHealth <= 0) {
 		NextWave();
 	}
-
+	//std::cout << "Red: " << playerDamageTaken[0] << " Blue: " << playerDamageTaken[1] << " Yellow: " << playerDamageTaken[2] << "\n";
 	spawnEnemy();
 }
