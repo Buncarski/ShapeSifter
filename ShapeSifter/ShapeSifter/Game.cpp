@@ -164,7 +164,7 @@ void Game::UpdateBullets() {
 
 void Game::UpdateEnemies()
 {
-	int iter_enemy = 0;
+	
 	//Update
 	for (Enemy* e : enemies) {
 		e->Update();
@@ -176,32 +176,48 @@ void Game::UpdateEnemies()
 		if (e->GetHitbox().intersects(player->GetHitbox())) { //On player collision
 			player->TakeDamage(1);
 			waveManager->addDamageTaken(e->GetEnemyType());
-			enemies.erase(enemies.begin() + iter_enemy);
-			delete e;
+			e->SetDestroyCall();
+			
 		} else if (e->GetHp() <= 0) { //On death
 			sfx_destroy.play();
-			enemies.erase(enemies.begin() + iter_enemy);
-			delete e;
-
+			e->SetDestroyCall();
 			this->waveManager->damageWave(1);
 		}
+	}
+
+	int iter_enemy = 0;
+	for (Enemy* e : enemies) {
+		if (e->GetDestroyCall() == true) {
+			enemies.erase(enemies.begin() + iter_enemy);
+			delete e;
+		}
+		
 		iter_enemy++;
 	}
 }
 
 void Game::UpdateCollisions()
 {
-	int iter_bullet = 0;
 
 	for (Bullet* b : bullets) {
 		//Game checks if bullet hits enemy when bullet no longer exists
 		for (Enemy* e : enemies) {
 			if (b->GetHitbox().intersects(e->GetHitbox())) {
 				e->dealDamage(b->GetDamage());
-				bullets.erase(bullets.begin() + iter_bullet);
-				delete b;
+				b->SetToDestroy();
 				break;
 			}
+		}
+	}
+
+	int iter_bullet = 0;
+
+	for (Bullet* b : bullets) {
+		//Game checks if bullet hits enemy when bullet no longer exists
+		if (b->GetHitTarget() == true) {
+			bullets.erase(bullets.begin() + iter_bullet);
+			delete b;
+			break;
 		}
 		iter_bullet++;
 	}

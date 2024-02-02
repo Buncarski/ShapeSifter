@@ -19,7 +19,7 @@ void Yellow::InitVars(GameObject& target, std::vector<Bullet*>& bullet_ref, char
 	}
 
 	this->target = &target;
-	this->movementSpeed = 3.f;
+	this->movementSpeed = 2.5f;
 	this->maxHp = 1;
 	this->hp = this->maxHp;
 	this->flinchResistance = 2.f;
@@ -47,7 +47,7 @@ void Yellow::InitVars(GameObject& target, std::vector<Bullet*>& bullet_ref, char
 
 	this->dodgeTimer = .0f;
 	this->setMovementDirection();
-	this->fakeoutChance = .9f;
+	this->fakeoutChance = .8f;
 	this->reDecideTimer = .0f;
 
 	
@@ -174,7 +174,7 @@ void Yellow::Logic()
 		for (Bullet* b : *this->bullet_ref) {
 			if (this->detector.getGlobalBounds().intersects(b->GetHitbox())) {
 				if (this->dodgeTimer <= 0.0f) {
-					this->dodgeTimer = 1.f;
+					this->dodgeTimer = 2.f;
 					this->dodgeVector = this->movementVector * 2.f;
 					this->dodgeVector.x *= -1.f;
 					float tmp = dodgeVector.x;
@@ -191,7 +191,7 @@ void Yellow::Logic()
 		for (Bullet* b : *this->bullet_ref) {
 			if (this->detector.getGlobalBounds().intersects(b->GetHitbox())) {
 				if (this->dodgeTimer <= 0.0f) {
-					this->dodgeTimer = 1.f;
+					this->dodgeTimer = 2.f;
 					this->dodgeVector = this->movementVector * 2.f;
 					this->dodgeVector.x *= -1.f;
 					float tmp = dodgeVector.x;
@@ -244,6 +244,6 @@ void Yellow::Update()
 void Yellow::Render(sf::RenderTarget* target)
 {
 	target->draw(this->sprite);
-	target->draw(this->detector);
+	//target->draw(this->detector);
 }
 

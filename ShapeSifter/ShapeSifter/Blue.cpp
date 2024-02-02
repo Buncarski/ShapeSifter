@@ -18,7 +18,7 @@ void Blue::InitVars(GameObject& target, char direction)
 	}
 	this->target = &target;
 	this->movementSpeed = .7f;
-	this->maxHp = 15;
+	this->maxHp = 12;
 	this->hp = this->maxHp;
 	this->flinchResistance = .5f;
 

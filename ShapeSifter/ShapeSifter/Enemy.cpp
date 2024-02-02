@@ -22,7 +22,7 @@ void Enemy::InitVars(GameObject& target, char direction)
 	this->maxHp = 5;
 	this->hp = this->maxHp;
 	this->flinchResistance = 2.f;
-
+	this->destroy = false;
 	this->InitTexture("Graphics/red_circle.png");
 	this->InitSprite();
 
@@ -95,6 +95,11 @@ sf::Vector2f Enemy::GetObjectTargetVector()
 	return sf::Vector2f(target_x/vecLength, target_y/vecLength);
 }
 
+sf::Vector2f Enemy::GetObjectTargetVector(sf::Vector2f targetPos)
+{
+	return this->GetObjectTargetVector();
+}
+
 void Enemy::setMovementDirection()
 {
 
@@ -126,6 +131,16 @@ sf::FloatRect Enemy::GetHitbox()
 char Enemy::GetEnemyType()
 {
 	return this->type;
+}
+
+bool Enemy::GetDestroyCall()
+{
+	return this->destroy;
+}
+
+void Enemy::SetDestroyCall()
+{
+	this->destroy = true;
 }
 
 void Enemy::dealDamage(int damage)
